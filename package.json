@@ -1,20 +1,53 @@
 {
-  "name": "Polish Street Renaming visualization tool",
+  "name": "renaming_tool",
   "version": "1.0.0",
   "description": "An application that helps visualize and analyse cases of street renaming in Poland",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Chinchillo/PolishStreetNames.git"
   },
-  "keywords": ["history" "Poland"],
+  "keywords": [
+    "history",
+    "Poland"
+  ],
   "author": "Katrin Reder-Zirkelbach",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Chinchillo/PolishStreetNames/issues"
   },
-  "homepage": "https://github.com/Chinchillo/PolishStreetNames#readme"
+  "homepage": "https://github.com/Chinchillo/PolishStreetNames#readme",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "dotenv-webpack": "^1.7.0",
+    "firebase": "^7.7.0",
+    "framer-motion": "^1.7.3",
+    "leaflet": "^1.6.0",
+    "react": "16.12.0",
+    "react-bootstrap": "^1.0.0",
+    "react-container-dimensions": "^1.4.1",
+    "react-dom": "16.12.0",
+    "react-leaflet": "^2.6.3",
+    "react-router-dom": "^5.1.2",
+    "react-toastify": "^5.5.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "cross-env": "^6.0.3",
+    "css-loader": "3.4.0",
+    "jsdoc": "^3.6.3",
+    "style-loader": "1.1.2",
+    "webpack": "4.41.5",
+    "webpack-cli": "3.3.10",
+    "webpack-dev-server": "3.10.1"
+  },
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server",
+    "build": "cross-env NODE_ENV=production webpack",
+    "gen_docs": "./node_modules/.bin/jsdoc -r ./src"
+  }
 }
