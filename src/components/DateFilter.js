@@ -1,12 +1,83 @@
 import React from "react";
-import { Dropdown, InputGroup, ButtonGroup, DropdownButton, FormControl, Container, Row, Col, Button } from "react-bootstrap";
+import { Dropdown, InputGroup, DropdownButton, FormControl } from "react-bootstrap";
+import DropdownDate from 'react-dropdown-date';
+import '../css/DateFilter.css'
 
 export default class DateFilter extends React.Component {
 
-    render() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: null,
+            selectedDate: '2012-11-15',
 
+        };
+    }
+
+    render() {
         return (
-            <>
+            <div>
+                <h3>{this.props.headline}</h3>
+                <DropdownDate
+                    startDate={                         // optional, if not provided 1900-01-01 is startDate
+                        this.props.startDate                    // 'yyyy-mm-dd' format only
+                    }
+                    endDate={                           // optional, if not provided current date is endDate
+                        this.props.endDate                   // 'yyyy-mm-dd' format only
+                    }
+                    selectedDate={                      // optional
+                        this.props.selectedDate         // 'yyyy-mm-dd' format only
+                    }
+                    order={                             // optional
+                        ['year', 'month', 'day']        // Order of the dropdowns
+                    }
+
+                    onDateChange={(date) => {           // optional
+                        this.setState({ date: date, selectedDate: date });
+                        this.props.alert(date)
+                    }}
+                    ids={                               // optional
+                        {
+                            year: 'select-year',
+                            month: 'select-month',
+                            day: 'select-day'
+                        }
+                    }
+                    classes={
+                        {
+                            dateContainer: 'row',
+                        }
+                    }
+                    names={                             // optional
+                        {
+                            year: 'year',
+                            month: 'month',
+                            day: 'day'
+                        }
+                    }
+
+                    defaultValues={                     // optional
+                        {
+                            year: 'Year',
+                            month: 'Month',
+                            day: 'Day'
+                        }
+                    }
+                    options={{                       // optional
+                        monthShort: true,
+                    }
+                    }
+                />
+            </div>
+        );
+    }
+    /*
+   render() {
+ 
+ 
+      
+               return (
+                   <>
                 <h3>From Date:</h3>
                 <InputGroup size="sm" className="mp-3">
 
@@ -49,9 +120,10 @@ export default class DateFilter extends React.Component {
             </>
 
 
-        )
-
-    }
+            )
+            
+ 
+}*/
 
 
 }
