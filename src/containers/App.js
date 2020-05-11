@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from "react";
 import Header from "../components/Header";
 import Map from "../components/Map";
+import NewMap from "../components/NewMap";
 import FilterContainer from "./FilterContainer";
 import Footer from "../components/Footer";
 import { Container, Row, Col } from "react-bootstrap";
@@ -21,26 +22,20 @@ export class App extends Component {
     this.filterChangesForSimilarity = this.filterChangesForSimilarity.bind(this)
   }
 
-  filterChangesForSimilarity(filter, start, end) {
-    // TODO: get start and end date and filter according to them, also
+  filterChangesForSimilarity(includeSimilar, start, end) {
     let filteredChanges = changes;
-    if (filter) {
+
+    if (!includeSimilar) {
       filteredChanges = changes.filter(change =>
         change.similarity < 0.9
       )
+      console.log("i have filtered for similarity")
     }
-
-
     filteredChanges = filteredChanges.filter(change =>
       start <= new Date(change.renaming_date) && new Date(change.renaming_date) <= end
     )
 
-    let someDate = new Date(filteredChanges[0].renaming_date)
-
-
-
-
-
+    console.log(filteredChanges.length)
     this.setState({ currentChanges: filteredChanges })
 
   }
@@ -48,6 +43,7 @@ export class App extends Component {
 
 
   componentDidMount() {
+
     //console.table(changes)
 
   }
@@ -63,7 +59,8 @@ export class App extends Component {
             {/* here i should probably set the height of the column and not in the map?*/}
 
             <Col >
-              <Map changes={this.state.currentChanges} />
+              {/*<Map changes={this.state.currentChanges} />*/}
+              <NewMap changes={this.state.currentChanges}></NewMap>
 
             </Col>
             <Col>
