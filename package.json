@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/Chinchillo/PolishStreetNames/issues"
   },
-  "homepage": "https://Chinchillo.github.io/PolishStreetNames/",
+  "homepage": "./",
   "dependencies": {
     "3": "^2.1.0",
     "-": "0.0.1",
@@ -61,6 +61,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
+    "deploy": "gh-pages -d dist",
+    "publish": "npm run build && npm run deploy",
     "gen_docs": "./node_modules/.bin/jsdoc -r ./src"
   }
 }
