@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => (
     <div className="page-footer">
-        FAQ
+        Footer
     </div>
 );
 export default Footer
