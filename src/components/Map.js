@@ -1,4 +1,5 @@
 import React from "react";
+//react-leaflet no longer installed!
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 //import MarkerClusterGroup from "react-leaflet-markercluster";
 //import 'react-leaflet-markercluster/dist/styles.min.css';
@@ -14,7 +15,7 @@ export default class Map extends React.Component {
                         lng: 19.353067,
                         zoom: 8,
                         minZoom: 6,
-                        height: window.innerWidth >= 992 ? (0.8 * window.innerHeight) : 300,
+                        height: window.innerWidth >= 992 ? (window.innerHeight) : 300,
                         markers: ''
                 };
 
@@ -22,7 +23,7 @@ export default class Map extends React.Component {
 
 
         updateDimensions() {
-                const mapHeight = window.innerWidth >= 992 ? (0.8 * window.innerHeight) : 300
+                const mapHeight = window.innerWidth >= 992 ? (window.innerHeight) : 300
                 this.setState({ height: mapHeight })
         }
 
@@ -54,6 +55,7 @@ export default class Map extends React.Component {
         componentDidMount() {
                 window.addEventListener("resize", this.updateDimensions.bind(this))
                 this.createMarkers();
+                console.log("innerWidth", window.innerWidth)
 
         }
 

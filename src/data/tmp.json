@@ -8,13 +8,17 @@
             "street_type": "ul.",
             "full_name": "ul. Świerczewskiego",
             "name1": "Świerczewskiego",
-            "name2": null
+            "name2": null,
+            "category": "people",
+            "wiki_id": "Q142768"
         },
         "old_name": {
             "street_type": "ul.",
             "full_name": "ul. św. Anny",
             "name1": "Anny",
-            "name2": "św. "
+            "name2": "św. ",
+            "category": "people",
+            "wiki_id": "Q164294"
         },
         "lon": 18.6228327,
         "coordinates": {
@@ -44,13 +48,15 @@
             "street_type": "ul.",
             "full_name": "ul. Królowej Śniegu",
             "name1": "Królowej Śniegu",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "old_name": {
             "street_type": "ul.",
             "full_name": "ul. Ołtarzewska",
             "name1": "Ołtarzewska",
-            "name2": null
+            "name2": null,
+            "category": "misc"
         },
         "lon": 20.7602761,
         "coordinates": {
@@ -84,13 +90,15 @@
             "street_type": "ul.",
             "full_name": "ul. Armii Krajowej",
             "name1": "Armii Krajowej",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "old_name": {
             "street_type": "ul.",
             "full_name": "ul. Wesoła",
             "name1": "Wesoła",
-            "name2": null
+            "name2": null,
+            "category": "misc"
         },
         "lon": 20.0970342,
         "coordinates": {
@@ -144,13 +152,15 @@
             "street_type": "ul.",
             "full_name": "ul. Świerkowa",
             "name1": "Świerkowa",
-            "name2": null
+            "name2": null,
+            "category": "misc"
         },
         "old_name": {
             "street_type": "ul.",
             "full_name": "ul. Garncarska",
             "name1": "Garncarska",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "lon": 20.9979833,
         "coordinates": {
@@ -180,13 +190,15 @@
             "street_type": "ul.",
             "full_name": "ul. Wileńska",
             "name1": "Wileńska",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "old_name": {
             "street_type": "ul.",
             "full_name": "ul. Bęczkowska",
             "name1": "Bęczkowska",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "lon": 20.661178,
         "coordinates": {
@@ -220,13 +232,15 @@
             "street_type": "ul.",
             "full_name": "ul. Akacjowa",
             "name1": "Akacjowa",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "old_name": {
             "street_type": "ul.",
             "full_name": "ul. Brodnieńska",
             "name1": "Brodnieńska",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "lon": 21.007652,
         "coordinates": {
@@ -252,13 +266,16 @@
             "street_type": "ul.",
             "full_name": "ul. aleja Ratuszowa",
             "name1": "aleja Ratuszowa",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "old_name": {
             "street_type": "ul.",
             "full_name": "ul. Prezydenta Franklina Roosevelta",
             "name1": "Roosevelta",
-            "name2": "Prezydenta Franklina "
+            "name2": "Prezydenta Franklina ",
+            "category": "people",
+            "wiki_id": "Q8007"
         },
         "lon": 18.250408,
         "coordinates": {
@@ -288,13 +305,16 @@
             "street_type": "pl.",
             "full_name": "pl. Rynek im. Biskupa Stefana Wierzbowskiego",
             "name1": "Rynek im. Biskupa Stefana Wierzbowskiego",
-            "name2": null
+            "name2": null,
+            "category": "people",
+            "wiki_id": "Q64748049"
         },
         "old_name": {
             "street_type": "ul.",
             "full_name": "ul. Ratuszowa",
             "name1": "Ratuszowa",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "lon": 21.2176321,
         "coordinates": {
@@ -328,13 +348,15 @@
             "street_type": "ul.",
             "full_name": "ul. Ku Słońcu",
             "name1": "Ku Słońcu",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "old_name": {
             "street_type": "ul.",
             "full_name": "ul. Storczykowa",
             "name1": "Storczykowa",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "lon": 17.009723,
         "coordinates": {
@@ -360,13 +382,15 @@
             "street_type": "ul.",
             "full_name": "ul. Klonowa",
             "name1": "Klonowa",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "old_name": {
             "street_type": "ul.",
             "full_name": "ul. Nowa Wieś Dolna",
             "name1": "Nowa Wieś Dolna",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "lon": 19.5748468,
         "coordinates": {
@@ -448,13 +472,15 @@
             "street_type": "ul.",
             "full_name": "ul. Rodzinna",
             "name1": "Rodzinna",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "old_name": {
             "street_type": "ul.",
             "full_name": "ul. Gęsia",
             "name1": "Gęsia",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "lon": 21.0827194,
         "coordinates": {
@@ -488,13 +514,15 @@
             "street_type": "pl.",
             "full_name": "pl. Plac ks. Franciszka Melzera",
             "name1": "Plac ks. Franciszka Melzera",
-            "name2": null
+            "name2": null,
+            "category": "people"
         },
         "old_name": {
             "street_type": "pl.",
             "full_name": "pl. Plac Zakopiański",
             "name1": "Plac Zakopiański",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "lon": 18.1945371,
         "coordinates": {
@@ -524,13 +552,15 @@
             "street_type": "ul.",
             "full_name": "ul. Brzozowa",
             "name1": "Brzozowa",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "old_name": {
             "street_type": "ul.",
             "full_name": "ul. Łąkowa",
             "name1": "Łąkowa",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "lon": 15.1413866,
         "coordinates": {
@@ -550,13 +580,17 @@
             "street_type": "pl.",
             "full_name": "pl. Rondo im. Alfonsa Zgrzebnioka",
             "name1": "Rondo im. Alfonsa Zgrzebnioka",
-            "name2": null
+            "name2": null,
+            "category": "people",
+            "wiki_id": "Q2644501"
         },
         "old_name": {
             "street_type": "pl.",
             "full_name": "pl. Rondo Rotmistrza Witolda Pileckiego",
             "name1": "Rondo Rotmistrza Witolda Pileckiego",
-            "name2": null
+            "name2": null,
+            "category": "people",
+            "wiki_id": "Q315691"
         },
         "lon": 18.1915105,
         "coordinates": {
@@ -610,13 +644,15 @@
             "street_type": "ul.",
             "full_name": "ul. Połanki",
             "name1": "Połanki",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "old_name": {
             "street_type": "ul.",
             "full_name": "ul. Polanki",
             "name1": "Polanki",
-            "name2": null
+            "name2": null,
+            "category": "other"
         },
         "lon": 21.5827079,
         "coordinates": {

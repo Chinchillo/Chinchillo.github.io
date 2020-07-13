@@ -1,6 +1,7 @@
 import React from "react";
 import { Dropdown, InputGroup, DropdownButton, FormControl } from "react-bootstrap";
 import DropdownDate from 'react-dropdown-date';
+import { Container, Col, Row } from "react-bootstrap";
 import '../css/DateFilter.css'
 
 export default class DateFilter extends React.Component {
@@ -16,8 +17,9 @@ export default class DateFilter extends React.Component {
 
     render() {
         return (
-            <div>
-                <h3>{this.props.headline}</h3>
+            <Container>
+                <h4>{this.props.headline}</h4>
+
                 <DropdownDate
                     startDate={                         // optional, if not provided 1900-01-01 is startDate
                         this.props.startDate                    // 'yyyy-mm-dd' format only
@@ -68,7 +70,8 @@ export default class DateFilter extends React.Component {
                     }
                     }
                 />
-            </div>
+
+            </Container>
         );
     }
     /*

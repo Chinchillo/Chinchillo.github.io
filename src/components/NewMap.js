@@ -22,7 +22,7 @@ export default class NewMap extends React.Component {
             lng: 19.353067,
             zoom: 8,
             minZoom: 6,
-            height: window.innerWidth >= 992 ? (0.8 * window.innerHeight) : 300,
+            height: window.innerWidth >= 992 ? (0.9 * window.innerHeight) : 300,
             markers: '',
             markerCluster: new L.MarkerClusterGroup()
         };
@@ -34,7 +34,7 @@ export default class NewMap extends React.Component {
     }
 
     updateDimensions() {
-        const mapHeight = window.innerWidth >= 992 ? (0.8 * window.innerHeight) : 300
+        const mapHeight = window.innerWidth >= 992 ? (0.9 * window.innerHeight) : 300
         this.setState({ height: mapHeight })
     }
 
@@ -45,7 +45,7 @@ export default class NewMap extends React.Component {
     componentDidMount() {
         window.addEventListener("resize", this.updateDimensions.bind(this))
         this.createMap()
-        console.log(this.props.changes.length)
+        //console.log(this.props.changes.length)
     }
 
     createMarkers() {
@@ -60,12 +60,12 @@ export default class NewMap extends React.Component {
             markers.push(marker)
         }
         )
-        console.log(markers)
+        //console.log(markers)
         this.state.markerCluster.addLayers(markers)
     }
 
     componentDidUpdate() {
-        console.log(this.props.changes.length)
+        //console.log(this.props.changes.length)
 
         this.createMarkers();
     }
@@ -76,7 +76,7 @@ export default class NewMap extends React.Component {
 
         });
 
-        L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}{r}.png', {
+        L.tileLayer('https://maps.wikimedia.org/osm-intl/${z}/${x}/${y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(this.map)
 

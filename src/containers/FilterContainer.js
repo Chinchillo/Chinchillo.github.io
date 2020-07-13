@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, Button, Container } from "react-bootstrap";
 import SimilarityFilter from "../components/SimilarityFilter";
 import DateFilter from "../components/DateFilter";
+import { toast } from "react-toastify";
 
 
 export default class FilterContainer extends React.Component {
@@ -21,7 +22,7 @@ export default class FilterContainer extends React.Component {
         this.setEndDate = this.setEndDate.bind(this)
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.HandleClick();
     }
 
@@ -31,8 +32,8 @@ export default class FilterContainer extends React.Component {
             toast("'To Date' has to be after the 'Start Date'")
         } else {
             this.props.filtersimilarity(includeSimilarNames, startFilteringDate, endFilteringDate)
+
         }
-        // TODO: error handling: if from is after to date
     }
 
     setIncludeSimilarNames() {
@@ -52,25 +53,25 @@ export default class FilterContainer extends React.Component {
 
         return (
             <Container>
-                <Row>
-                    <Col>
-                        <DateFilter alert={this.setStartDate} headline={"From Date:"} startDate={this.state.earliestPossibleDate} endDate={this.state.latestPossibledate} selectedDate={this.state.startFilteringDate} />
-                    </Col>
-                    <Col>
-                        <DateFilter alert={this.setEndDate} headline={"To Date:"} startDate={this.state.earliestPossibleDate} endDate={this.state.latestPossibledate} selectedDate={this.state.endFilteringDate} />
-                    </Col>
 
+                <Row>
+                    <DateFilter alert={this.setStartDate} headline={"From Date:"} startDate={this.state.earliestPossibleDate} endDate={this.state.latestPossibledate} selectedDate={this.state.startFilteringDate} />
                 </Row>
                 <Row>
+
+                    <DateFilter alert={this.setEndDate} headline={"To Date:"} startDate={this.state.earliestPossibleDate} endDate={this.state.latestPossibledate} selectedDate={this.state.endFilteringDate} />
+                </Row>
+
+                {/*<Row>
                     <Col className="mt-md-3">
                         <SimilarityFilter checked={this.state.includeSimilarNames} checkboxClicked={this.setIncludeSimilarNames} />
                     </Col>
-                </Row>
-                <Row>
-                    <Col className="mt-md-3"> <Button onClick={this.HandleClick}>Apply</Button></Col>
+                </Row>*/}
+                <Row className=" mt-3 mb-1 ml-1" >
+                    <Button onClick={this.HandleClick}>Apply</Button>
 
                 </Row>
-            </Container>)
+            </Container >)
     }
 }
 

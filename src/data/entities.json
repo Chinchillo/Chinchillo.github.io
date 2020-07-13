@@ -1,0 +1,34 @@
+[
+    {
+        "title": "Karola Swierczewskiego",
+        "wiki_title": "Karol Świerczewski",
+        "wiki_id": "Q142768",
+        "value": 3,
+        "number_old": 3,
+        "category": "person"
+    },
+    {
+        "title": "Swieta Anna",
+        "wiki_title": "Święta Anna",
+        "wiki_id": "Q164294",
+        "number_new": 2,
+        "number_old": 0,
+        "category": "person"
+    },
+    {
+        "title": "Fraklina D Roosevelta",
+        "wiki_title": "Franklin Delano Roosevelt",
+        "wiki_id": "Q8007",
+        "number_new": 0,
+        "number_old": 1,
+        "category": "person"
+    },
+    {
+        "title": "Stefana Wierzbowskiego",
+        "wiki_title": "Stefan Wierzbowski",
+        "wiki_id": "Q64748049",
+        "number_new": 1,
+        "number_old": 0,
+        "category": "person"
+    }
+]
