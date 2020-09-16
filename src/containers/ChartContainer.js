@@ -19,6 +19,7 @@ export default class ChartContainer extends React.Component {
             dic["text"] = thing.title
             dic["value"] = thing[val]
             dic["category"] = thing.category
+            dic["wiki_title"] = thing.wiki_title
             output.push(dic)
         })
         return output

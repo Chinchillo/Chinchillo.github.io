@@ -31,5 +31,61 @@
         "number_new": 1,
         "number_old": 0,
         "category": "person"
+    },
+    {
+        "title": "40-lecia PRL",
+        "wiki_title": "40-lecia PRL",
+        "number_new": 0,
+        "number_old": 3,
+        "category": "date"
+    },
+    {
+        "title": "18 Stycznia",
+        "wiki_title": "18 Stycznia",
+        "number_new": 0,
+        "number_old": 3,
+        "category": "date"
+    },
+    {
+        "title": "20 Stycznia",
+        "wiki_title": "20 Stycznia",
+        "number_new": 0,
+        "number_old": 2,
+        "category": "date"
+    },
+    {
+        "title": "Wojska Polskiego",
+        "wiki_title": "Wojsko Polskie",
+        "number_new": 2,
+        "number_old": 0,
+        "category": "other"
+    },
+    {
+        "title": "Armii Czerwonej",
+        "wiki_title": "Czerwona Armia",
+        "number_new": 0,
+        "number_old": 3,
+        "category": "other"
+    },
+    {
+        "title": "Bojowników o Wolność i Demokrację",
+        "wiki_title": "Bojownicy o Wolność i Demokrację",
+        "number_new": 0,
+        "number_old": 1,
+        "category": "other"
+    },
+    {
+        "title": "Kościelna",
+        "wiki_title": "Kościelny",
+        "number_new": 3,
+        "number_old": 0,
+        "category": "non-entity"
+    },
+    {
+        "title": "Kwiatowa",
+        "wiki_title": "Kwiatowy",
+        "number_new": 0,
+        "number_old": 1,
+        "category": "non-entity"
     }
 ]
