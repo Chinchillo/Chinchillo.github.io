@@ -40,7 +40,7 @@ const WordCloud = (props) => {
 
 
     return (
-        <ReactWordcloud callbacks={callbacks} words={props.data} />
+        <ReactWordcloud callbacks={callbacks} words={words} />
 
     );
 }

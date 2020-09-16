@@ -110,10 +110,8 @@ export class App extends Component {
               <Row style={{ height: 300 }} ><Chart data={this.state.quarterData} /></Row>
             </Col>
           </Row>
-          <ChartContainer data={entities}></ChartContainer>
-
           <Row>
-
+            <ChartContainer data={entities}></ChartContainer>
           </Row>
         </Container>
       </>

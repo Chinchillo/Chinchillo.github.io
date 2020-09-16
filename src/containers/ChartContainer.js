@@ -2,7 +2,7 @@ import React from "react";
 import WordCloud from "../components/WordCloud";
 import PieChart from "../components/PieChart";
 
-import { Col, Row, Container } from "react-bootstrap";
+import { Col, Row, Container, Button } from "react-bootstrap";
 
 export default class ChartContainer extends React.Component {
     constructor(props) {
@@ -29,6 +29,9 @@ export default class ChartContainer extends React.Component {
 
         return (
             <Container>
+                <Row className="mb-2 mt-3 justify-content-md-center">
+                    <Button className="mr-3" size="lg">Show Old Names</Button>{' '}
+                    <Button size="lg">Show New Names</Button></Row>
                 <Row>
                     <Col style={{
                         backgroundColor: "black"
