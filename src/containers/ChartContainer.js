@@ -17,7 +17,7 @@ export default class ChartContainer extends React.Component {
         data.forEach(function (thing) {
             let dic = {}
             dic["text"] = thing.title
-            dic["value"] = thing.val
+            dic["value"] = thing[val]
             dic["category"] = thing.category
             output.push(dic)
         })
@@ -33,10 +33,10 @@ export default class ChartContainer extends React.Component {
                     <Button className="mr-3" size="lg">Show Old Names</Button>{' '}
                     <Button size="lg">Show New Names</Button></Row>
                 <Row>
-                    <Col style={{
-                        backgroundColor: "black"
-
-                    }} ><WordCloud data={this.createListForWordCloud("number_old")}></WordCloud></Col>
+                    <Col>
+                        <WordCloud data={this.createListForWordCloud("number_old")}>
+                        </WordCloud>
+                    </Col>
                     <Col><PieChart></PieChart></Col>
 
                 </Row>
