@@ -1,6 +1,10 @@
 import React from "react";
+<<<<<<< Updated upstream
 //react-leaflet no longer installed!
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
+=======
+//import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
+>>>>>>> Stashed changes
 //import MarkerClusterGroup from "react-leaflet-markercluster";
 //import 'react-leaflet-markercluster/dist/styles.min.css';
 import "../css/Map.css"
