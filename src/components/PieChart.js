@@ -1,25 +1,42 @@
-import React from "react";
-
-
-import { PieChart } from 'react-minimal-pie-chart';
-
-
-const MyPieChart = (props) => {
-    //hier kommen die kategorien mit der anzahl der umbenennungen
+import React, { PureComponent } from "react";
+import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 
 
 
-    return (
+//hier kommen die kategorien mit der anzahl der umbenennungen
+const data = [
+    { name: 'People', value: 400 },
+    { name: 'dates', value: 300 },
+    { name: 'other entities', value: 300 },
+    { name: 'no entities', value: 200 },
+];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 
-        <PieChart
-            data={[
-                { title: 'One', value: 10, title: "people", color: '#E38627' },
-                { title: 'Two', value: 15, title: "dates", color: '#C13C37' },
-                { title: 'Three', value: 20, title: "other entities", color: '#6A2135' },
-                { title: "Four", value: 10, title: "misc", color: "#6A2111" }
-            ]}
-        //label={({ dataEntry }) => dataEntry.title}
-        />)
+export default class MyPieChart extends React.Component {
+
+    render() {
+        return (
+            <ResponsiveContainer width="100%" height="100%">
+                <PieChart onMouseEnter={this.onPieEnter}>
+                    <Pie
+                        data={data}
+                        cx={120}
+                        cy={200}
+                        innerRadius={60}
+                        outerRadius={80}
+                        nameKey="name"
+                        fill="#8884d8"
+                        paddingAngle={5}
+                        label={entry => entry.name}
+                    >
+                        {
+                            data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]} />)
+                        }
+                    </Pie>
+
+                </PieChart>
+            </ResponsiveContainer>
+        );
+    }
 }
-export default MyPieChart;

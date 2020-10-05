@@ -7,10 +7,7 @@ import "../css/Map.css"
 
 const Wrapper =
     styled.div`
-
 `;
-
-
 
 
 export default class NewMap extends React.Component {
@@ -29,10 +26,10 @@ export default class NewMap extends React.Component {
 
         this.createMap = this.createMap.bind(this)
         this.createMarkers = this.createMarkers.bind(this)
-
-
     }
-
+    /**
+     * Set height of map either to 90 % of window height or 300 px on smaller screens
+     */
     updateDimensions() {
         const mapHeight = window.innerWidth >= 992 ? (0.9 * window.innerHeight) : 300
         this.setState({ height: mapHeight })
@@ -83,8 +80,6 @@ export default class NewMap extends React.Component {
 
         this.map.addLayer(this.state.markerCluster)
         this.createMarkers()
-
-
     }
 
     render() {
