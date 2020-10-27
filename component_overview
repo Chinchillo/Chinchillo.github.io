@@ -1,0 +1,12 @@
+App
+    Header
+    NewMap
+    ToastContainer
+    FilterContainer
+        DateFilter  
+        DateFilter
+        [SimilarityFilter]
+    Chart
+    ChartContainer
+        WordCloud
+        PieChart

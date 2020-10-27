@@ -26,10 +26,12 @@ export class App extends Component {
     super(props);
     this.state = {
       currentChanges: changes,
-      quarterData: {}
+      quarterData: {},
+      entityColors: {}
     };
     this.filterChangesForSimilarity = this.filterChangesForSimilarity.bind(this)
     this.createDates = this.createDates.bind(this)
+    this.createColors = this.createColors.bind(this)
 
   }
 
@@ -49,6 +51,19 @@ export class App extends Component {
     toast.success(`Showing ${number} change(s)`)
     this.setState({ currentChanges: filteredChanges })
     this.createDates(filteredChanges);
+
+  }
+
+  createColors() {
+    const style = getComputedStyle(document.body);
+    const theme_colors = {};
+
+    theme_colors["other"] = style.getPropertyValue('--secondary');
+    theme_colors["date"] = style.getPropertyValue('--success');
+    theme_colors["person"] = style.getPropertyValue('--info');
+    theme_colors["non-entity"] = style.getPropertyValue('--warning');
+    console.log(theme_colors)
+    return theme_colors;
 
   }
 
@@ -74,6 +89,11 @@ export class App extends Component {
       quarterData: tmp
     });
 
+  }
+
+  componentDidMount() {
+    const colors = this.createColors();
+    this.setState({ entityColors: colors })
   }
 
 
@@ -111,7 +131,7 @@ export class App extends Component {
             </Col>
           </Row>
           <Row>
-            <ChartContainer data={entities}></ChartContainer>
+            <ChartContainer data={entities} colors={this.state.entityColors}></ChartContainer>
           </Row>
         </Container>
       </>

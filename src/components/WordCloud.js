@@ -6,6 +6,14 @@ import words from "../data/words"
 
 
 const WordCloud = (props) => {
+    console.log(props.colors)
+    function getFont() {
+        const style = getComputedStyle(document.body);
+        const font = style.getPropertyValue("font-family");
+        console.log(font);
+        return font
+    }
+
 
     function getCallback(callback) {
         return function (word, event) {
@@ -25,6 +33,7 @@ const WordCloud = (props) => {
         };
     }
     const options = {
+        fontFamily: getFont(),
         fontSizes: [30, 68],
         rotationAngles: [0, 90],
         spiral: "archimedean",
@@ -33,7 +42,7 @@ const WordCloud = (props) => {
     }
 
     const callbacks = {
-        getWordColor: (word) => (word.category == "person" ? "orange" : word.category == "date" ? "black" : "blue"),
+        getWordColor: (word) => props.colors[word.category],
         getWordTooltip: (word) =>
             `The name "${word.text}" appears ${word.value} times.`,
         onWordClick: getCallback("onWordClick"),

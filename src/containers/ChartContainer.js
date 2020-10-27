@@ -27,22 +27,24 @@ export default class ChartContainer extends React.Component {
     }
 
     render() {
-
         return (
-            <Container>
+            <Container fluid>
                 <Row className="mb-2 mt-3 justify-content-md-center">
                     <Button className="mr-3" size="lg">Show Old Names</Button>{' '}
                     <Button size="lg">Show New Names</Button></Row>
-                <Row>
-                    <Col>
-                        <WordCloud data={this.createListForWordCloud("number_old")}>
+                <Row >
+                    <Col md={6}>
+                        <WordCloud data={this.createListForWordCloud("number_old")} colors={this.props.colors}>
                         </WordCloud>
                     </Col>
-                    <Col><PieChart></PieChart></Col>
+
+                    <Col md={6}>
+                        <PieChart colors={this.props.colors}></PieChart>
+                    </Col>
 
                 </Row>
-            </Container>
 
+            </Container >
         )
 
 
