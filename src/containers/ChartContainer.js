@@ -11,6 +11,11 @@ export default class ChartContainer extends React.Component {
         this.createListForWordCloud = this.createListForWordCloud.bind(this)
     }
 
+    handleClick(value) {
+        this.props.handleClick(value)
+
+    }
+
     createListForWordCloud(val) {
         let data = this.props.data
         let output = []
@@ -30,8 +35,9 @@ export default class ChartContainer extends React.Component {
         return (
             <Container fluid>
                 <Row className="mb-2 mt-3 justify-content-md-center">
-                    <Button className="mr-3" size="lg">Show Old Names</Button>{' '}
-                    <Button size="lg">Show New Names</Button></Row>
+                    <Button className="mr-3" size="lg" active={this.props.ShowOldNames} onClick={(e) => this.handleClick(true, e)}>Show Old Names</Button>{' '}
+                    <Button size="lg" active={!this.props.ShowOldNames} onClick={(e) => this.handleClick(false, e)}>Show New Names</Button>
+                </Row>
                 <Row >
                     <Col md={6}>
                         <WordCloud data={this.createListForWordCloud("number_old")} colors={this.props.colors}>

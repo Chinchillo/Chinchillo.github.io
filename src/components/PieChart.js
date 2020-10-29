@@ -5,10 +5,10 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 //mock data
 const data = [
-    { name: 'People', value: 400 },
-    { name: 'dates', value: 300 },
-    { name: 'other entities', value: 300 },
-    { name: 'no entities', value: 200 },
+    { name: 'person', value: 400 },
+    { name: 'date', value: 300 },
+    { name: 'other', value: 300 },
+    { name: 'non-entity', value: 200 },
 ];
 
 
@@ -44,6 +44,7 @@ export default class MyPieChart extends React.Component {
     }
 
     render() {
+        console.log(this.props.colors)
         return (
 
 
@@ -59,7 +60,7 @@ export default class MyPieChart extends React.Component {
                     label={entry => entry.name}
                 >
                     {
-                        data.map((entry, index) => <Cell fill={this.state.colors[index % this.state.colors.length]} />)
+                        data.map((entry) => <Cell fill={this.props.colors[entry.name]} />)
                     }
                 </Pie>
 

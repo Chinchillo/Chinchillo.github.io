@@ -6,11 +6,10 @@ import words from "../data/words"
 
 
 const WordCloud = (props) => {
-    console.log(props.colors)
+    console.log(props.data)
     function getFont() {
         const style = getComputedStyle(document.body);
         const font = style.getPropertyValue("font-family");
-        console.log(font);
         return font
     }
 
@@ -26,17 +25,13 @@ const WordCloud = (props) => {
                         window.open(`https://pl.wikipedia.org/w/index.php?search=${word.wiki_title}`, "_blank");
                     }
                 })
-                .transition()
-                .attr("background", "white")
-                .attr("font-size", isActive ? "300%" : "100%")
-                .attr("text-decoration", isActive ? "underline" : "none");
+
         };
     }
     const options = {
         fontFamily: getFont(),
-        fontSizes: [30, 68],
-        rotationAngles: [0, 90],
-        spiral: "archimedean",
+        fontSizes: [30, 70],
+        rotations: 0,
         padding: 1
 
     }
@@ -46,8 +41,8 @@ const WordCloud = (props) => {
         getWordTooltip: (word) =>
             `The name "${word.text}" appears ${word.value} times.`,
         onWordClick: getCallback("onWordClick"),
-        onWordMouseOut: getCallback("onWordMouseOut"),
-        onWordMouseOver: getCallback("onWordMouseOver")
+        onWordMouseOver: getCallback("onWordMouseOver"),
+        onWordMouseOut: getCallback("onWordMouseOut")
     };
 
 

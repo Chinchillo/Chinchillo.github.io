@@ -27,14 +27,19 @@ export class App extends Component {
     this.state = {
       currentChanges: changes,
       quarterData: {},
-      entityColors: {}
+      entityColors: {},
+      oldNamesInVisualization: false, //true: old names, false: new names
     };
     this.filterChangesForSimilarity = this.filterChangesForSimilarity.bind(this)
     this.createDates = this.createDates.bind(this)
     this.createColors = this.createColors.bind(this)
+    this.changeOldNewVisualization = this.changeOldNewVisualization.bind(this)
 
   }
 
+  changeOldNewVisualization(value) {
+    this.setState({ oldNamesInVisualization: value })
+  }
   filterChangesForSimilarity(includeSimilar, start, end) {
     console.log("START", start, "END", end)
     let filteredChanges = changes;
@@ -53,16 +58,16 @@ export class App extends Component {
     this.createDates(filteredChanges);
 
   }
-
+  /*
+  get colors from bootstrap to pass down to charts
+  */
   createColors() {
     const style = getComputedStyle(document.body);
     const theme_colors = {};
-
     theme_colors["other"] = style.getPropertyValue('--secondary');
     theme_colors["date"] = style.getPropertyValue('--success');
     theme_colors["person"] = style.getPropertyValue('--info');
     theme_colors["non-entity"] = style.getPropertyValue('--warning');
-    console.log(theme_colors)
     return theme_colors;
 
   }
@@ -131,7 +136,7 @@ export class App extends Component {
             </Col>
           </Row>
           <Row>
-            <ChartContainer data={entities} colors={this.state.entityColors}></ChartContainer>
+            <ChartContainer handleClick={this.changeOldNewVisualization} data={entities} ShowOldNames={this.state.oldNamesInVisualization} colors={this.state.entityColors}></ChartContainer>
           </Row>
         </Container>
       </>
