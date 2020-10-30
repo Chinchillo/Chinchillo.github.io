@@ -17,6 +17,7 @@ export default class MyPieChart extends React.Component {
             < PieChart width={400} height={400} onMouseEnter={this.onPieEnter} className="mx-auto">
                 <Pie
                     data={data}
+                    dataKey="value"
                     innerRadius={60}
                     outerRadius={80}
                     nameKey="name"
@@ -25,7 +26,7 @@ export default class MyPieChart extends React.Component {
                     label={entry => entry.name}
                 >
                     {
-                        data.map((entry) => <Cell fill={this.props.colors[entry.name]} />)
+                        data.map((entry, index) => <Cell fill={this.props.colors[entry.name]} key={index} />)
                     }
                 </Pie>
                 <Tooltip />

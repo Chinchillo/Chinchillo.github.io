@@ -24,13 +24,12 @@ export class App extends Component {
 
   constructor(props) {
     super(props);
+    this.entityColors = {} //colors from bootstrap stylesheet
     this.state = {
       currentChanges: changes, //current changes, filtered by date
-      quarterData: {}, //renamings per quarter year
-      entityColors: {}, //colors from bootstrap stylesheet
     };
     this.filterChangesForSimilarity = this.filterChangesForSimilarity.bind(this)
-    this.createDates = this.createDates.bind(this)
+    this.createQuarterData = this.createQuarterData.bind(this)
     this.createColors = this.createColors.bind(this)
   }
 
@@ -51,7 +50,6 @@ export class App extends Component {
     const number = filteredChanges.length
     toast.success(`Showing ${number} change(s)`)
     this.setState({ currentChanges: filteredChanges })
-    this.createDates(filteredChanges);
   }
   /*
   get colors from bootstrap to pass down to charts
@@ -64,12 +62,11 @@ export class App extends Component {
     theme_colors["person"] = style.getPropertyValue('--info');
     theme_colors["non-entity"] = style.getPropertyValue('--warning');
     return theme_colors;
-
   }
 
   //compute number of renamings per quarter year
-  createDates(changes) {
-    let renaming_dates = changes.map((x) => (x.renaming_date))
+  createQuarterData() {
+    let renaming_dates = this.state.currentChanges.map((x) => (x.renaming_date))
     let changesPerQuarter = {}
     for (let date of renaming_dates) {
       date = new Date(date)
@@ -82,16 +79,12 @@ export class App extends Component {
       } else {
         changesPerQuarter[key] = 1
       }
-
     }
-    this.setState({
-      quarterData: changesPerQuarter
-    });
-
+    return changesPerQuarter
   }
 
   componentDidMount() {
-    this.setState({ entityColors: this.createColors() })
+    this.entityColors = this.createColors()
   }
 
 
@@ -123,11 +116,11 @@ export class App extends Component {
               </Row>
               <FilterContainer filtersimilarity={this.filterChangesForSimilarity} />
               <br></br>
-              <Row style={{ height: 300 }} ><Chart data={this.state.quarterData} /></Row>
+              <Row style={{ height: 300 }} ><Chart data={this.createQuarterData()} /></Row>
             </Col>
           </Row>
           <Row>
-            <ChartContainer data={entities} colors={this.state.entityColors}></ChartContainer>
+            <ChartContainer data={entities} colors={this.entityColors}></ChartContainer>
           </Row>
         </Container>
       </>
