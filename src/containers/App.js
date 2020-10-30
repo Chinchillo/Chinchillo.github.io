@@ -11,8 +11,8 @@ import FilterContainer from "./FilterContainer";
 import ChartContainer from "./ChartContainer";
 import Chart from "../components/Chart";
 import { Container, Row, Col } from "react-bootstrap";
-import changes from "../data/tmp.json";
-import entities from "../data/entities.json";
+import changes from "../data/tmp.json"; //actual renaming data
+import entities from "../data/entities.json"; //mock data that include entities
 
 
 /* 
@@ -25,25 +25,20 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentChanges: changes,
-      quarterData: {},
-      entityColors: {},
-      oldNamesInVisualization: false, //true: old names, false: new names
+      currentChanges: changes, //current changes, filtered by date
+      quarterData: {}, //renamings per quarter year
+      entityColors: {}, //colors from bootstrap stylesheet
     };
     this.filterChangesForSimilarity = this.filterChangesForSimilarity.bind(this)
     this.createDates = this.createDates.bind(this)
     this.createColors = this.createColors.bind(this)
-    this.changeOldNewVisualization = this.changeOldNewVisualization.bind(this)
-
   }
 
-  changeOldNewVisualization(value) {
-    this.setState({ oldNamesInVisualization: value })
-  }
+
   filterChangesForSimilarity(includeSimilar, start, end) {
-    console.log("START", start, "END", end)
-    let filteredChanges = changes;
 
+    let filteredChanges = changes;
+    //filter cases where old and new name are very similar
     if (!includeSimilar) {
       filteredChanges = changes.filter(change =>
         change.similarity < 0.9
@@ -56,7 +51,6 @@ export class App extends Component {
     toast.success(`Showing ${number} change(s)`)
     this.setState({ currentChanges: filteredChanges })
     this.createDates(filteredChanges);
-
   }
   /*
   get colors from bootstrap to pass down to charts
@@ -72,33 +66,31 @@ export class App extends Component {
 
   }
 
+  //compute number of renamings per quarter year
   createDates(changes) {
     let renaming_dates = changes.map((x) => (x.renaming_date))
-    let tmp = {}
-    console.log("my dates?", renaming_dates)
+    let changesPerQuarter = {}
     for (let date of renaming_dates) {
       date = new Date(date)
-      let month = date.getMonth() + 1 //e.g. 1
-
+      let month = date.getMonth() + 1 //e.g. 1 for January
       const year = date.getFullYear()
-
-      let key = month.toString() + "/" + year.toString()
-      if (key in tmp) {
-        tmp[key] = tmp[key] + 1
+      let key = month.toString() + "/" + year.toString() // 1/2019
+      // count changes per quarter
+      if (key in changesPerQuarter) {
+        changesPerQuarter[key] = changesPerQuarter[key] + 1
       } else {
-        tmp[key] = 1
+        changesPerQuarter[key] = 1
       }
 
     }
     this.setState({
-      quarterData: tmp
+      quarterData: changesPerQuarter
     });
 
   }
 
   componentDidMount() {
-    const colors = this.createColors();
-    this.setState({ entityColors: colors })
+    this.setState({ entityColors: this.createColors() })
   }
 
 
@@ -112,9 +104,7 @@ export class App extends Component {
           <Row >
             {/* here i should probably set the height of the column and not in the map?*/}
             <Col md={8}>
-              {/*<Map changes={this.state.currentChanges} />*/}
               <NewMap changes={this.state.currentChanges}></NewMap>
-
             </Col>
             <Col md={4} >
               <Row style={{ height: 50 }}>
@@ -136,7 +126,7 @@ export class App extends Component {
             </Col>
           </Row>
           <Row>
-            <ChartContainer handleClick={this.changeOldNewVisualization} data={entities} ShowOldNames={this.state.oldNamesInVisualization} colors={this.state.entityColors}></ChartContainer>
+            <ChartContainer data={entities} colors={this.state.entityColors}></ChartContainer>
           </Row>
         </Container>
       </>

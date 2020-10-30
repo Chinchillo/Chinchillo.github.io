@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Button, Container } from "react-bootstrap";
-import SimilarityFilter from "../components/SimilarityFilter";
+//import SimilarityFilter from "../components/SimilarityFilter";
 import DateFilter from "../components/DateFilter";
 import { toast } from "react-toastify";
 
@@ -32,7 +32,6 @@ export default class FilterContainer extends React.Component {
             toast("'To Date' has to be after the 'Start Date'")
         } else {
             this.props.filtersimilarity(includeSimilarNames, startFilteringDate, endFilteringDate)
-
         }
     }
 
