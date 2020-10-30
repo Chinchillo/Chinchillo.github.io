@@ -44,6 +44,7 @@ export class App extends Component {
         change.similarity < 0.9
       )
     }
+    //filter for date of renaming
     filteredChanges = filteredChanges.filter(change =>
       start <= new Date(change.renaming_date) && new Date(change.renaming_date) <= end
     )

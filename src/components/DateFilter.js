@@ -8,11 +8,6 @@ export default class DateFilter extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            date: null,
-            selectedDate: '2012-11-15',
-
-        };
     }
 
     render() {
@@ -35,7 +30,6 @@ export default class DateFilter extends React.Component {
                     }
 
                     onDateChange={(date) => {           // optional
-                        this.setState({ date: date, selectedDate: date });
                         this.props.alert(date)
                     }}
                     ids={                               // optional
