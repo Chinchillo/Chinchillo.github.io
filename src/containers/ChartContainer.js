@@ -20,15 +20,15 @@ export default class ChartContainer extends React.Component {
     }
 
     createListForWordCloud() {
-        const filter = this.state.oldNamesInVisualization ? "number_old" : "number_new"
+        const filter = this.state.oldNamesInVisualization ? "numberOld" : "numberNew"
         let output = []
+
         this.props.data.forEach(function (thing) {
             if (thing[filter] > 0) {
                 let dic = {}
                 dic["text"] = thing.title
                 dic["value"] = thing[filter]
                 dic["category"] = thing.category
-                dic["wiki_title"] = thing.wiki_title
                 output.push(dic)
             }
         })
@@ -37,7 +37,7 @@ export default class ChartContainer extends React.Component {
 
     createListForPieChart() {
         // take old or new streets, according to user selection
-        const filter = this.state.oldNamesInVisualization ? "number_old" : "number_new"
+        const filter = this.state.oldNamesInVisualization ? "numberOld" : "numberNew"
         let output = []
         this.props.data.forEach(function (thing) {
             //check if at least one street was named after entity
@@ -59,7 +59,6 @@ export default class ChartContainer extends React.Component {
     }
 
     render() {
-        console.log(this.createListForPieChart())
         return (
             <Container fluid>
                 <Row className="mb-2 mt-3 justify-content-md-center">
@@ -67,12 +66,12 @@ export default class ChartContainer extends React.Component {
                     <Button size="lg" active={!this.state.oldNamesInVisualization} onClick={(e) => this.handleClick(false, e)}>Show New Names</Button>
                 </Row>
                 <Row >
-                    <Col md={6}>
+                    <Col md={8}>
                         <WordCloud data={this.createListForWordCloud()} colors={this.props.colors}>
                         </WordCloud>
                     </Col>
 
-                    <Col md={6}>
+                    <Col md={4}>
                         <PieChart data={this.createListForPieChart()} colors={this.props.colors}></PieChart>
                     </Col>
 

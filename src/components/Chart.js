@@ -18,7 +18,6 @@ export default class Chart extends React.Component {
             data.push(obj)
         }
         data.sort((a, b) => (a.x > b.x) ? 1 : -1)
-        console.log("chart data", data)
         return data
     }
 

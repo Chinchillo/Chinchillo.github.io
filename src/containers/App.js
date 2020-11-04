@@ -11,8 +11,8 @@ import FilterContainer from "./FilterContainer";
 import ChartContainer from "./ChartContainer";
 import Chart from "../components/Chart";
 import { Container, Row, Col } from "react-bootstrap";
-import changes from "../data/tmp.json"; //actual renaming data
-import entities from "../data/entities.json"; //mock data that include entities
+import changes from "../data/data.json"; //actual renaming data
+import entities from "../data/computed_entities.json"; //mock data that include entities
 
 
 /* 
@@ -31,7 +31,43 @@ export class App extends Component {
     this.filterChangesForSimilarity = this.filterChangesForSimilarity.bind(this)
     this.createQuarterData = this.createQuarterData.bind(this)
     this.createColors = this.createColors.bind(this)
+    this.createEntities = this.createEntities.bind(this)
   }
+
+  createEntities() {
+    let entities = []
+    for (let change of this.state.currentChanges) {
+      const new_dic = entities.find(element => element.title == change.title_new)
+      if (new_dic === undefined) {
+        const dic = {
+          "title": change.title_new,
+          "category": change.category_new,
+          "numberOld": 0,
+          "numberNew": 1
+        }
+        entities.push(dic)
+      } else {
+        new_dic.numberNew = new_dic.numberNew + 1
+      }
+
+
+      const old_dic = entities.find(element => element.title == change.title_old)
+      if (old_dic === undefined) {
+        const dic = {
+          "title": change.title_old,
+          "category": change.category_old,
+          "numberOld": 1,
+          "numberNew": 0
+        }
+        entities.push(dic)
+      } else {
+        old_dic.numberOld = old_dic.numberOld + 1
+      }
+    }
+    return entities
+  }
+
+
 
 
   filterChangesForSimilarity(includeSimilar, start, end) {
@@ -85,6 +121,7 @@ export class App extends Component {
 
   componentDidMount() {
     this.entityColors = this.createColors()
+    this.createEntities()
   }
 
 
@@ -120,7 +157,7 @@ export class App extends Component {
             </Col>
           </Row>
           <Row>
-            <ChartContainer data={entities} colors={this.entityColors}></ChartContainer>
+            <ChartContainer data={this.createEntities()} colors={this.entityColors}></ChartContainer>
           </Row>
         </Container>
       </>

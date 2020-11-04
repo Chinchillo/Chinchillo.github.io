@@ -50,7 +50,7 @@ export default class NewMap extends React.Component {
         const markers = []
         changes.forEach(change => {
             const marker = new L.Marker([change.lat, change.lon]);
-            marker.bindPopup(`New name: ${change.new_name.full_name} <br> Old name:${change.old_name.full_name} <br> Date: ${change.renaming_date}`)
+            marker.bindPopup(`New name: ${change.new_full_name} <br> Old name:${change.old_full_name} <br> Date: ${change.renaming_date}`)
             markers.push(marker)
         }
         )
@@ -70,8 +70,6 @@ export default class NewMap extends React.Component {
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(this.map)
-
-
         this.map.addLayer(this.state.markerCluster)
         this.createMarkers()
     }

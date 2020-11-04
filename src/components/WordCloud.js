@@ -6,7 +6,7 @@ import words from "../data/words"
 
 
 const WordCloud = (props) => {
-    console.log(props.data)
+    console.log("Data inside wordcloud ", props.data)
     function getFont() {
         const style = getComputedStyle(document.body);
         const font = style.getPropertyValue("font-family");
@@ -22,7 +22,7 @@ const WordCloud = (props) => {
             text
                 .on("click", () => {
                     if (isActive) {
-                        window.open(`https://pl.wikipedia.org/w/index.php?search=${word.wiki_title}`, "_blank");
+                        window.open(`https://pl.wikipedia.org/w/index.php?search=${word.text}`, "_blank");
                     }
                 })
 
