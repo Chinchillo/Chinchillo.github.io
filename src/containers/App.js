@@ -12,7 +12,6 @@ import ChartContainer from "./ChartContainer";
 import Chart from "../components/Chart";
 import { Container, Row, Col } from "react-bootstrap";
 import changes from "../data/data.json"; //actual renaming data
-import entities from "../data/computed_entities.json"; //mock data that include entities
 
 
 /* 
