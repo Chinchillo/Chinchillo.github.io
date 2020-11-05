@@ -1,5 +1,5 @@
 import React from "react";
-import { XYPlot, XAxis, YAxis, VerticalGridLines, HorizontalGridLines, LineSeries } from 'react-vis';
+import { XYPlot, XAxis, YAxis, VerticalGridLines, HorizontalGridLines, LineSeries, MarkSeries } from 'react-vis';
 import AutoSizer from "react-virtualized-auto-sizer";
 
 export default class Chart extends React.Component {
@@ -34,6 +34,7 @@ export default class Chart extends React.Component {
                         <YAxis />
                         <XAxis title="Period of time (year/quarter)" />
                         <YAxis title="Number of renamings" />
+                        {/*<MarkSeries data={[{ x: 0, y: 0 }]} style={{ display: 'none' }} />*/}
 
                     </XYPlot>)}
             </AutoSizer >

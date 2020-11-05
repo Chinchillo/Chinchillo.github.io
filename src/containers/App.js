@@ -34,6 +34,16 @@ export class App extends Component {
     this.filterChangesByMapSection = this.filterChangesByMapSection.bind(this)
   }
 
+  componentDidMount() {
+    this.entityColors = this.createColors()
+    this.createEntities()
+  }
+
+  componentDidUpdate() {
+    //console.log("current changes ", this.state.currentChanges)
+    //console.log("filtered by map ", this.state.changesFilteredByMap)
+  }
+
   createEntities() {
     let entities = []
     for (let change of this.state.changesFilteredByMap) {
@@ -127,10 +137,7 @@ export class App extends Component {
     return changesPerQuarter
   }
 
-  componentDidMount() {
-    this.entityColors = this.createColors()
-    this.createEntities()
-  }
+
 
 
   render() {

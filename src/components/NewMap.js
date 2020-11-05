@@ -46,6 +46,7 @@ export default class NewMap extends React.Component {
         this.getMapBoundaries()
     }
 
+
     createMarkers() {
         this.state.markerCluster.clearLayers();
         const changes = this.props.changes;
@@ -57,10 +58,12 @@ export default class NewMap extends React.Component {
         }
         )
         this.state.markerCluster.addLayers(markers)
+
     }
 
     componentDidUpdate() {
         this.createMarkers();
+
     }
 
     getMapBoundaries() {
