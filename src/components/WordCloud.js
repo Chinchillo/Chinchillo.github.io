@@ -6,7 +6,12 @@ import words from "../data/words"
 
 
 const WordCloud = (props) => {
-    console.log("Data inside wordcloud ", props.data)
+    // only get 40 most used entities for performance reasons
+    const data = props.data.sort(function (a, b) {
+        return b.value - a.value
+    })
+    const shortened = data.slice(0, 41)
+
     function getFont() {
         const style = getComputedStyle(document.body);
         const font = style.getPropertyValue("font-family");
@@ -50,7 +55,7 @@ const WordCloud = (props) => {
 
     return (
 
-        <ReactWordcloud words={props.data} callbacks={callbacks} options={options} />
+        <ReactWordcloud words={shortened} callbacks={callbacks} options={options} />
 
     );
 }

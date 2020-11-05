@@ -13,6 +13,7 @@ export default class MyPieChart extends React.Component {
 
     render() {
         const data = this.props.data
+        console.log("Pie Chart Data: ", data)
         return (
             < PieChart width={400} height={400} onMouseEnter={this.onPieEnter} className="mx-auto">
                 <Pie

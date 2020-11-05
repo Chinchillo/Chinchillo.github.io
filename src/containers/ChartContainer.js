@@ -29,8 +29,13 @@ export default class ChartContainer extends React.Component {
                 dic["text"] = thing.title
                 dic["value"] = thing[filter]
                 dic["category"] = thing.category
-                output.push(dic)
+                if (!(thing.title === undefined || thing.category === undefined)) {
+                    console.log("undefined: ", thing)
+                    output.push(dic)
+                }
+
             }
+
         })
         return output
     }
@@ -41,7 +46,7 @@ export default class ChartContainer extends React.Component {
         let output = []
         this.props.data.forEach(function (thing) {
             //check if at least one street was named after entity
-            if (thing[filter] > 0) {
+            if (thing[filter] > 0 && !(thing.category == undefined)) {
                 const elementsIndex = output.findIndex(element => element.name == thing.category)
                 //first occurence
                 if (elementsIndex < 0) {
@@ -49,6 +54,7 @@ export default class ChartContainer extends React.Component {
                     dic["name"] = thing.category
                     dic["value"] = 1
                     output.push(dic)
+
                     //any later occurence of entity
                 } else {
                     output[elementsIndex].value = output[elementsIndex].value + 1
