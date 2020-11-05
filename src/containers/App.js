@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import React, { Component } from "react";
 import { toast, ToastContainer } from "react-toastify";
-
 import Header from "../components/Header";
 import NewMap from "../components/NewMap";
 import FilterContainer from "./FilterContainer";
@@ -26,16 +25,18 @@ export class App extends Component {
     this.entityColors = {} //colors from bootstrap stylesheet
     this.state = {
       currentChanges: changes, //current changes, filtered by date
+      changesFilteredByMap: [] //changes filtered by map
     };
     this.filterChangesForSimilarity = this.filterChangesForSimilarity.bind(this)
     this.createQuarterData = this.createQuarterData.bind(this)
     this.createColors = this.createColors.bind(this)
     this.createEntities = this.createEntities.bind(this)
+    this.filterChangesByMapSection = this.filterChangesByMapSection.bind(this)
   }
 
   createEntities() {
     let entities = []
-    for (let change of this.state.currentChanges) {
+    for (let change of this.state.changesFilteredByMap) {
       const new_dic = entities.find(element => element.title == change.title_new)
       if (new_dic === undefined) {
         const dic = {
@@ -48,8 +49,6 @@ export class App extends Component {
       } else {
         new_dic.numberNew = new_dic.numberNew + 1
       }
-
-
       const old_dic = entities.find(element => element.title == change.title_old)
       if (old_dic === undefined) {
         const dic = {
@@ -64,6 +63,16 @@ export class App extends Component {
       }
     }
     return entities
+  }
+
+  filterChangesByMapSection(map_coordinates) {
+    let changesFilteredByMapSection = []
+    this.state.currentChanges.forEach((change) => {
+      if (map_coordinates.contains({ "lat": change.lat, "lon": change.lon })) {
+        changesFilteredByMapSection.push(change)
+      }
+    })
+    this.setState({ changesFilteredByMap: changesFilteredByMapSection })
   }
 
 
@@ -134,7 +143,7 @@ export class App extends Component {
           <Row >
             {/* here i should probably set the height of the column and not in the map?*/}
             <Col md={8}>
-              <NewMap changes={this.state.currentChanges}></NewMap>
+              <NewMap changes={this.state.currentChanges} onMapChange={this.filterChangesByMapSection}></NewMap>
             </Col>
             <Col md={4} >
               <Row style={{ height: 50 }}>

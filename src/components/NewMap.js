@@ -26,6 +26,7 @@ export default class NewMap extends React.Component {
 
         this.createMap = this.createMap.bind(this)
         this.createMarkers = this.createMarkers.bind(this)
+        this.getMapBoundaries = this.getMapBoundaries.bind(this)
     }
     /**
      * Set height of map either to 90 % of window height or 300 px on smaller screens
@@ -42,6 +43,7 @@ export default class NewMap extends React.Component {
     componentDidMount() {
         window.addEventListener("resize", this.updateDimensions.bind(this))
         this.createMap()
+        this.getMapBoundaries()
     }
 
     createMarkers() {
@@ -60,8 +62,13 @@ export default class NewMap extends React.Component {
     componentDidUpdate() {
         this.createMarkers();
     }
+
+    getMapBoundaries() {
+        this.props.onMapChange(this.map.getBounds())
+    }
+
     createMap() {
-        this.map = L.map('map', {
+        let map = L.map('map', {
             center: [this.lat, this.lng],
             zoom: this.zoom,
             minZoom: this.minZoom
@@ -69,8 +76,11 @@ export default class NewMap extends React.Component {
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        }).addTo(this.map)
-        this.map.addLayer(this.state.markerCluster)
+        }).addTo(map)
+        map.addLayer(this.state.markerCluster)
+        map.on('zoomend', this.getMapBoundaries)
+        map.on("moveend", this.getMapBoundaries)
+        this.map = map
         this.createMarkers()
     }
 

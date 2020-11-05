@@ -30,7 +30,6 @@ export default class ChartContainer extends React.Component {
                 dic["value"] = thing[filter]
                 dic["category"] = thing.category
                 if (!(thing.title === undefined || thing.category === undefined)) {
-                    console.log("undefined: ", thing)
                     output.push(dic)
                 }
 
