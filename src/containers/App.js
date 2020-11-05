@@ -10,7 +10,7 @@ import FilterContainer from "./FilterContainer";
 import ChartContainer from "./ChartContainer";
 import Chart from "../components/Chart";
 import { Container, Row, Col } from "react-bootstrap";
-import changes from "../data/data.json"; //actual renaming data
+import changes from "../data/full_data.json"; //actual renaming data
 
 
 /* 
@@ -77,11 +77,17 @@ export class App extends Component {
 
   filterChangesByMapSection(map_coordinates) {
     let changesFilteredByMapSection = []
-    this.state.currentChanges.forEach((change) => {
-      if (map_coordinates.contains({ "lat": change.lat, "lon": change.lon })) {
-        changesFilteredByMapSection.push(change)
-      }
-    })
+    try {
+      this.state.currentChanges.forEach((change) => {
+        if (typeof change.lat !== "undefined") {
+          if (map_coordinates.contains({ "lat": change.lat, "lon": change.lon })) {
+            changesFilteredByMapSection.push(change)
+          }
+        }
+      })
+    } catch {
+
+    }
     this.setState({ changesFilteredByMap: changesFilteredByMapSection })
   }
 

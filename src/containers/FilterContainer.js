@@ -9,14 +9,14 @@ export default class FilterContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.earliestPossibleDate = new Date('2006-01-01T00:00:00'), //earliest date for dropdown
-            this.latestPossibledate = new Date(), //latest date for dropdown
+        this.earliestPossibleDate = new Date('2019-01-01T00:00:00'), //earliest date for dropdown
+            this.latestPossibledate = new Date('2019-12-31T00:00:00'), //latest date for dropdown
 
             //it has state, because information is not lifted up at once, only at button click
             this.state = {
                 includeSimilarNames: false, //should similar names be included
-                startFilteringDate: new Date('2017-01-01T00:00:00'), //currently set start date
-                endFilteringDate: new Date('2017-02-01T00:00:00') //currently set end date
+                startFilteringDate: new Date('2019-01-01T00:00:00'), //currently set start date
+                endFilteringDate: new Date('2019-02-01T00:00:00') //currently set end date
             };
         this.HandleClick = this.HandleClick.bind(this)
         this.setIncludeSimilarNames = this.setIncludeSimilarNames.bind(this)

@@ -52,9 +52,13 @@ export default class NewMap extends React.Component {
         const changes = this.props.changes;
         const markers = []
         changes.forEach(change => {
-            const marker = new L.Marker([change.lat, change.lon]);
-            marker.bindPopup(`New name: ${change.new_full_name} <br> Old name:${change.old_full_name} <br> Date: ${change.renaming_date}`)
-            markers.push(marker)
+            if (typeof change.lat !== 'undefined') {
+
+                const marker = new L.Marker([change.lat, change.lon]);
+                marker.bindPopup(`New name: ${change.new_full_name} <br> Old name:${change.old_full_name} <br> Date: ${change.renaming_date}`)
+                markers.push(marker)
+            }
+
         }
         )
         this.state.markerCluster.addLayers(markers)
