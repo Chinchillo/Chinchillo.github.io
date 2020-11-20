@@ -15,8 +15,8 @@ export default class FilterContainer extends React.Component {
             //it has state, because information is not lifted up at once, only at button click
             this.state = {
                 includeSimilarNames: false, //should similar names be included
-                startFilteringDate: new Date('2019-01-01T00:00:00'), //currently set start date
-                endFilteringDate: new Date('2019-02-01T00:00:00') //currently set end date
+                startFilteringDate: this.props.startFilteringDate, //currently set start date
+                endFilteringDate: this.props.endFilteringDate //currently set end date
             };
         this.HandleClick = this.HandleClick.bind(this)
         this.setIncludeSimilarNames = this.setIncludeSimilarNames.bind(this)
@@ -25,7 +25,6 @@ export default class FilterContainer extends React.Component {
     }
 
     componentWillMount() {
-        this.HandleClick();
     }
 
     HandleClick() {

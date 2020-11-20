@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../node_modules/react-vis/dist/style.css";
 import 'react-toastify/dist/ReactToastify.css';
-
+import * as L from 'leaflet';
 import React, { Component } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import Header from "../components/Header";
@@ -22,26 +22,37 @@ export class App extends Component {
 
   constructor(props) {
     super(props);
-    this.entityColors = {} //colors from bootstrap stylesheet
-    this.state = {
-      currentChanges: changes, //current changes, filtered by date
-      changesFilteredByMap: [] //changes filtered by map
-    };
-    this.filterChangesForSimilarity = this.filterChangesForSimilarity.bind(this)
+    //class variables
+    //colors from bootstrap stylesheet
+    this.entityColors = {}
+    //date filter start date set on first page load
+    this.startFilteringDate = new Date('2019-01-01T00:00:00'),
+      //date filter end date set on first page load
+      this.endFilteringDate = new Date('2019-02-01T00:00:00'),
+      this.initialBounds =
+      L.latLngBounds(L.latLng(49.767, 9.733), L.latLng(54.572, 28.938)),
+      //binding class functions
+      this.filterChangesForSimilarity = this.filterChangesForSimilarity.bind(this)
     this.createQuarterData = this.createQuarterData.bind(this)
     this.createColors = this.createColors.bind(this)
     this.createEntities = this.createEntities.bind(this)
     this.filterChangesByMapSection = this.filterChangesByMapSection.bind(this)
+
+    // initializing state
+    this.state = {
+      changesFilteredByDate: this.filterChangesForSimilarity(false, this.startFilteringDate, this.endFilteringDate),
+      changesFilteredByMap: []
+    }
   }
 
   componentDidMount() {
     this.entityColors = this.createColors()
-    this.createEntities()
+    this.filterChangesByMapSection(this.initialBounds)
   }
 
   componentDidUpdate() {
-    //console.log("current changes ", this.state.currentChanges)
-    //console.log("filtered by map ", this.state.changesFilteredByMap)
+    console.log("filteredByDate: ", this.state.changesFilteredByDate)
+    console.log("changes filtered by map: ", this.state.changesFilteredByMap)
   }
 
   createEntities() {
@@ -72,35 +83,39 @@ export class App extends Component {
         old_dic.numberOld = old_dic.numberOld + 1
       }
     }
+    //console.log("entities: ", entities)
     return entities
   }
 
   filterChangesByMapSection(map_coordinates) {
     let changesFilteredByMapSection = []
     try {
-      this.state.currentChanges.forEach((change) => {
+      this.state.changesFilteredByDate.forEach((change) => {
         if (typeof change.lat !== "undefined") {
+          //console.log("change.lat ", change.lat)
           if (map_coordinates.contains({ "lat": change.lat, "lon": change.lon })) {
             changesFilteredByMapSection.push(change)
           }
+        } else {
+          //TODO: what about them?
         }
       })
     } catch {
 
     }
     this.setState({ changesFilteredByMap: changesFilteredByMapSection })
+
   }
 
 
 
 
   filterChangesForSimilarity(includeSimilar, start, end) {
-
     let filteredChanges = changes;
     //filter cases where old and new name are very similar
     if (!includeSimilar) {
       filteredChanges = changes.filter(change =>
-        change.similarity < 0.9
+        change.similarity < 0.85
       )
     }
     //filter for date of renaming
@@ -109,7 +124,8 @@ export class App extends Component {
     )
     const number = filteredChanges.length
     toast.success(`Showing ${number} change(s)`)
-    this.setState({ currentChanges: filteredChanges })
+    this.setState({ changesFilteredByDate: filteredChanges })
+    return filteredChanges
   }
   /*
   get colors from bootstrap to pass down to charts
@@ -126,10 +142,20 @@ export class App extends Component {
 
   //compute number of renamings per quarter year
   createQuarterData() {
-    let renaming_dates = this.state.currentChanges.map((x) => (x.renaming_date))
-    let changesPerQuarter = {}
+    let renaming_dates = this.state.changesFilteredByMap.map((x) => (x.renaming_date))
+    let changesPerQuarter = []
     for (let date of renaming_dates) {
+      /*
       date = new Date(date)
+      const foundElement = changesPerQuarter.find(element => element.x === date)
+      if (foundElement !== undefined) {
+        foundElement.y = foundElement.y + 1
+      } else {
+        const item = { x: date, y: 1 }
+        changesPerQuarter.push(item)
+      }
+       */
+
       let month = date.getMonth() + 1 //e.g. 1 for January
       const year = date.getFullYear()
       let key = month.toString() + "/" + year.toString() // 1/2019
@@ -139,6 +165,7 @@ export class App extends Component {
       } else {
         changesPerQuarter[key] = 1
       }
+
     }
     return changesPerQuarter
   }
@@ -156,7 +183,7 @@ export class App extends Component {
           <Row >
             {/* here i should probably set the height of the column and not in the map?*/}
             <Col md={8}>
-              <NewMap changes={this.state.currentChanges} onMapChange={this.filterChangesByMapSection}></NewMap>
+              <NewMap changes={this.state.changesFilteredByDate} onMapChange={this.filterChangesByMapSection}></NewMap>
             </Col>
             <Col md={4} >
               <Row style={{ height: 50 }}>
@@ -172,7 +199,7 @@ export class App extends Component {
                   pauseOnHover
                 />
               </Row>
-              <FilterContainer filtersimilarity={this.filterChangesForSimilarity} />
+              <FilterContainer startFilteringDate={this.startFilteringDate} endFilteringDate={this.endFilteringDate} filtersimilarity={this.filterChangesForSimilarity} />
               <br></br>
               <Row style={{ height: 300 }} ><Chart data={this.createQuarterData()} /></Row>
             </Col>

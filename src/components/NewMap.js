@@ -15,7 +15,7 @@ export default class NewMap extends React.Component {
         super(props);
         this.lat = 52.227326,
             this.lng = 19.353067,
-            this.zoom = 8,
+            this.zoom = 6,
             this.minZoom = 6,
             //state stores stuff that is manipulated and should lead to re-rendering on change
             this.state = {
@@ -43,7 +43,6 @@ export default class NewMap extends React.Component {
     componentDidMount() {
         window.addEventListener("resize", this.updateDimensions.bind(this))
         this.createMap()
-        this.getMapBoundaries()
     }
 
 

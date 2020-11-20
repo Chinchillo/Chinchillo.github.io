@@ -8,6 +8,13 @@ export default class MyPieChart extends React.Component {
         super(props)
 
     }
+    componentDidMount() {
+        //console.log("pie chart data mounted: ", this.props.data.length)
+    }
+
+    componentDidUpdate() {
+        //console.log("pie chart update: ", this.props.data.length)
+    }
 
 
 
