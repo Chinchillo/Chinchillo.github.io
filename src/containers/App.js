@@ -145,16 +145,17 @@ export class App extends Component {
     let renaming_dates = this.state.changesFilteredByMap.map((x) => (x.renaming_date))
     let changesPerQuarter = []
     for (let date of renaming_dates) {
-      /*
+
       date = new Date(date)
-      const foundElement = changesPerQuarter.find(element => element.x === date)
-      if (foundElement !== undefined) {
-        foundElement.y = foundElement.y + 1
-      } else {
-        const item = { x: date, y: 1 }
-        changesPerQuarter.push(item)
-      }
-       */
+      /*
+     const foundElement = changesPerQuarter.find(element => element.x === date)
+     if (foundElement !== undefined) {
+       foundElement.y = foundElement.y + 1
+     } else {
+       const item = { x: date, y: 1 }
+       changesPerQuarter.push(item)
+     }
+      */
 
       let month = date.getMonth() + 1 //e.g. 1 for January
       const year = date.getFullYear()
