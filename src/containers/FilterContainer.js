@@ -9,7 +9,7 @@ export default class FilterContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.earliestPossibleDate = new Date('2019-01-01T00:00:00'), //earliest date for dropdown
+        this.earliestPossibleDate = new Date('2018-01-01T00:00:00'), //earliest date for dropdown
             this.latestPossibledate = new Date('2019-12-31T00:00:00'), //latest date for dropdown
 
             //it has state, because information is not lifted up at once, only at button click

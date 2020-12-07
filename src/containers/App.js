@@ -9,9 +9,12 @@ import NewMap from "../components/NewMap";
 import FilterContainer from "./FilterContainer";
 import ChartContainer from "./ChartContainer";
 import Chart from "../components/Chart";
-import { Container, Row, Col } from "react-bootstrap";
-import changes from "../data/full_data.json"; //actual renaming data
+import DateChart from "../components/DateChart";
 
+import { Container, Row, Col } from "react-bootstrap";
+
+import changes from "../data/full_data_2010-now.json"; //actual renaming data
+import tmp from "../data/tmp.json"
 
 /* 
 App
@@ -33,7 +36,7 @@ export class App extends Component {
       L.latLngBounds(L.latLng(49.767, 9.733), L.latLng(54.572, 28.938)),
       //binding class functions
       this.filterChangesForSimilarity = this.filterChangesForSimilarity.bind(this)
-    this.createQuarterData = this.createQuarterData.bind(this)
+    this.createDateSeries = this.createDateSeries.bind(this)
     this.createColors = this.createColors.bind(this)
     this.createEntities = this.createEntities.bind(this)
     this.filterChangesByMapSection = this.filterChangesByMapSection.bind(this)
@@ -140,33 +143,20 @@ export class App extends Component {
     return theme_colors;
   }
 
-  //compute number of renamings per quarter year
-  createQuarterData() {
+  //map dates and renamings that happened on the date
+  createDateSeries() {
     let renaming_dates = this.state.changesFilteredByMap.map((x) => (x.renaming_date))
     let changesPerQuarter = []
     for (let date of renaming_dates) {
-
-      date = new Date(date)
-      /*
-     const foundElement = changesPerQuarter.find(element => element.x === date)
-     if (foundElement !== undefined) {
-       foundElement.y = foundElement.y + 1
-     } else {
-       const item = { x: date, y: 1 }
-       changesPerQuarter.push(item)
-     }
-      */
-
-      let month = date.getMonth() + 1 //e.g. 1 for January
-      const year = date.getFullYear()
-      let key = month.toString() + "/" + year.toString() // 1/2019
-      // count changes per quarter
-      if (key in changesPerQuarter) {
-        changesPerQuarter[key] = changesPerQuarter[key] + 1
+      const date_strings = date.split("-")
+      const year_and_month = date_strings[0] + "-" + date_strings[1]
+      const foundElement = changesPerQuarter.find(element => element[0] === year_and_month)
+      if (foundElement !== undefined) {
+        foundElement[1] = foundElement[1] + 1
       } else {
-        changesPerQuarter[key] = 1
+        const item = [year_and_month, 1]
+        changesPerQuarter.push(item)
       }
-
     }
     return changesPerQuarter
   }
@@ -202,7 +192,7 @@ export class App extends Component {
               </Row>
               <FilterContainer startFilteringDate={this.startFilteringDate} endFilteringDate={this.endFilteringDate} filtersimilarity={this.filterChangesForSimilarity} />
               <br></br>
-              <Row style={{ height: 300 }} ><Chart data={this.createQuarterData()} /></Row>
+              <Row style={{ height: 300 }}> <Chart data={this.createDateSeries()} /></Row>
             </Col>
           </Row>
           <Row>

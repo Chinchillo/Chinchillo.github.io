@@ -64,8 +64,13 @@ export default class NewMap extends React.Component {
 
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         this.createMarkers();
+        console.log("newMap Did update")
+        //neu filtern, wenn neue markers erzeugt wurden
+        if (prevProps.changes !== this.props.changes) {
+            this.getMapBoundaries()
+        }
 
     }
 
