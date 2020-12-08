@@ -84,7 +84,7 @@ export default class Chart extends React.Component {
 
     render() {
         const { value } = this.state;
-        const test = getComputedStyle(document.body).getPropertyValue('--primary')
+        const primary = getComputedStyle(document.body).getPropertyValue('--primary')
 
         return (
             <AutoSizer >
@@ -98,7 +98,7 @@ export default class Chart extends React.Component {
 
                         <LineMarkSeries
 
-                            markStyle={{ fill: test }}
+                            markStyle={{ fill: primary }}
                             data={this.createData()}
                             onValueMouseOver={this._rememberValue}
                             onValueMouseOut={this._forgetValue}
