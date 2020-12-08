@@ -65,7 +65,7 @@ export default class ChartContainer extends React.Component {
 
     render() {
         return (
-            <Container fluid>
+            <Container fluid >
                 <Row className="mb-2 mt-3 justify-content-md-center">
                     <Button className="mr-3" size="lg" active={this.state.oldNamesInVisualization} onClick={(e) => this.handleClick(true, e)}>Show Old Names</Button>{' '}
                     <Button size="lg" active={!this.state.oldNamesInVisualization} onClick={(e) => this.handleClick(false, e)}>Show New Names</Button>

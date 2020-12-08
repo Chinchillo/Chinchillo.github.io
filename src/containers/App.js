@@ -9,12 +9,11 @@ import NewMap from "../components/NewMap";
 import FilterContainer from "./FilterContainer";
 import ChartContainer from "./ChartContainer";
 import Chart from "../components/Chart";
-import DateChart from "../components/DateChart";
 
 import { Container, Row, Col } from "react-bootstrap";
 
 import changes from "../data/full_data_2010-now.json"; //actual renaming data
-import tmp from "../data/tmp.json"
+//import tmp from "../data/tmp.json"
 
 /* 
 App
@@ -25,23 +24,22 @@ export class App extends Component {
 
   constructor(props) {
     super(props);
-    //class variables
+    this.mapHeight = window.innerWidth >= 992 ? (0.9 * window.innerHeight) : 300
     //colors from bootstrap stylesheet
     this.entityColors = {}
     //date filter start date set on first page load
     this.startFilteringDate = new Date('2019-01-01T00:00:00'),
       //date filter end date set on first page load
       this.endFilteringDate = new Date('2019-02-01T00:00:00'),
+      //initial map section
       this.initialBounds =
       L.latLngBounds(L.latLng(49.767, 9.733), L.latLng(54.572, 28.938)),
-      //binding class functions
       this.filterChangesForSimilarity = this.filterChangesForSimilarity.bind(this)
     this.createDateSeries = this.createDateSeries.bind(this)
     this.createColors = this.createColors.bind(this)
     this.createEntities = this.createEntities.bind(this)
     this.filterChangesByMapSection = this.filterChangesByMapSection.bind(this)
 
-    // initializing state
     this.state = {
       changesFilteredByDate: this.filterChangesForSimilarity(false, this.startFilteringDate, this.endFilteringDate),
       changesFilteredByMap: []
@@ -54,8 +52,8 @@ export class App extends Component {
   }
 
   componentDidUpdate() {
-    console.log("filteredByDate: ", this.state.changesFilteredByDate)
-    console.log("changes filtered by map: ", this.state.changesFilteredByMap)
+    //console.log("filteredByDate: ", this.state.changesFilteredByDate)
+    //console.log("changes filtered by map: ", this.state.changesFilteredByMap)
   }
 
   createEntities() {
@@ -86,7 +84,6 @@ export class App extends Component {
         old_dic.numberOld = old_dic.numberOld + 1
       }
     }
-    //console.log("entities: ", entities)
     return entities
   }
 
@@ -95,7 +92,6 @@ export class App extends Component {
     try {
       this.state.changesFilteredByDate.forEach((change) => {
         if (typeof change.lat !== "undefined") {
-          //console.log("change.lat ", change.lat)
           if (map_coordinates.contains({ "lat": change.lat, "lon": change.lon })) {
             changesFilteredByMapSection.push(change)
           }
@@ -171,12 +167,13 @@ export class App extends Component {
         <Header />
         {/*Container for functionality with heigth 100 % */}
         <Container fluid className="h-100">
-          <Row >
+          <Row style={{ height: this.mapHeight }}>
+            <NewMap height={this.mapHeight} changes={this.state.changesFilteredByDate} onMapChange={this.filterChangesByMapSection}></NewMap>
+
             {/* here i should probably set the height of the column and not in the map?*/}
-            <Col md={8}>
-              <NewMap changes={this.state.changesFilteredByDate} onMapChange={this.filterChangesByMapSection}></NewMap>
+            <Col md={8} style={{ zIndex: 0 }}>
             </Col>
-            <Col md={4} >
+            <Col md={4} style={{ zIndex: 2, backgroundColor: 'rgba(255,255,255,0.3)' }}>
               <Row style={{ height: 50 }}>
                 <ToastContainer
                   position="top-right"
@@ -192,7 +189,7 @@ export class App extends Component {
               </Row>
               <FilterContainer startFilteringDate={this.startFilteringDate} endFilteringDate={this.endFilteringDate} filtersimilarity={this.filterChangesForSimilarity} />
               <br></br>
-              <Row style={{ height: 300 }}> <Chart data={this.createDateSeries()} /></Row>
+              <Row style={{ height: 300, backgroundColor: 'rgba(255,255,255,0.9)', borderRadius: "10px" }}> <Chart data={this.createDateSeries()} /></Row>
             </Col>
           </Row>
           <Row>

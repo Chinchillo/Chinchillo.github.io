@@ -28,23 +28,26 @@ export default class Chart extends React.Component {
 
         //data, filtered by month. '2019-01" as string
         let data = this.props.data
-        data.sort()
 
-        let TimeDifference = 0
-        //jeweils 1. 'Monat' 'Jahr
-        const firstDate = new Date(data[0][0])
-        const lastDate = new Date(data[data.length - 1][0])
-        TimeDifference = Math.abs((firstDate.getTime() - lastDate.getTime()) / (1000 * 3600 * 24))
-        //ca 1 to 13 months, most common case
-        if (390 > TimeDifference > 35) {
+        if (data.length > 0) {
+            data.sort()
+            let TimeDifference = 0
+            //jeweils 1. 'Monat' 'Jahr
+            const firstDate = new Date(data[0][0])
+            const lastDate = new Date(data[data.length - 1][0])
+            TimeDifference = Math.abs((firstDate.getTime() - lastDate.getTime()) / (1000 * 3600 * 24))
+            //ca 1 to 13 months, most common case
+            if (390 > TimeDifference > 35) {
 
+            }
+            //more than 12 monts
+            else if (TimeDifference > 390) {
+                data = this.createYearData()
+            }
+
+            return data
         }
-        //more than 12 monts
-        else if (TimeDifference > 390) {
-            data = this.createYearData()
-        }
-
-        return data
+        return [["no renamings", 0]]
 
     }
 
@@ -81,19 +84,21 @@ export default class Chart extends React.Component {
 
     render() {
         const { value } = this.state;
+        const test = getComputedStyle(document.body).getPropertyValue('--primary')
 
         return (
             <AutoSizer >
                 {({ height, width }) => (
 
-                    <XYPlot margin={{ bottom: 100 }} height={height} width={width} getX={d => d[0]}
+                    <XYPlot margin={{ bottom: 70, top: 20 }} height={height} width={width} getX={d => d[0]}
                         getY={d => d[1]} xType="ordinal" >
                         <HorizontalGridLines />
                         <XAxis tickLabelAngle={-90} title="Time" />
                         <YAxis title="Number of renamings" />
 
                         <LineMarkSeries
-                            markStyle={{ fill: "none" }}
+
+                            markStyle={{ fill: test }}
                             data={this.createData()}
                             onValueMouseOver={this._rememberValue}
                             onValueMouseOut={this._forgetValue}

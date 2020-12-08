@@ -15,11 +15,12 @@ export default class NewMap extends React.Component {
         super(props);
         this.lat = 52.227326,
             this.lng = 19.353067,
-            this.zoom = 6,
+            this.zoom = 8,
             this.minZoom = 6,
             //state stores stuff that is manipulated and should lead to re-rendering on change
             this.state = {
-                height: window.innerWidth >= 992 ? (0.9 * window.innerHeight) : 300,
+                //height: window.innerWidth >= 992 ? (0.7 * window.innerHeight) : 300,
+                height: this.props.mapHeight,
                 markers: '',
                 markerCluster: new L.MarkerClusterGroup()
             };
@@ -41,7 +42,7 @@ export default class NewMap extends React.Component {
     }
 
     componentDidMount() {
-        window.addEventListener("resize", this.updateDimensions.bind(this))
+        //window.addEventListener("resize", this.updateDimensions.bind(this))
         this.createMap()
     }
 
@@ -66,8 +67,6 @@ export default class NewMap extends React.Component {
 
     componentDidUpdate(prevProps) {
         this.createMarkers();
-        console.log("newMap Did update")
-        //neu filtern, wenn neue markers erzeugt wurden
         if (prevProps.changes !== this.props.changes) {
             this.getMapBoundaries()
         }
@@ -97,6 +96,9 @@ export default class NewMap extends React.Component {
 
     render() {
 
-        return <Wrapper id="map" style={{ height: this.state.height }}></Wrapper >
+        return <Wrapper id="map" style={{
+            height: this.props.height, width: document.body.clientWidth, zIndex: 1, position: "absolute"
+        }
+        }></Wrapper >
     }
 }
