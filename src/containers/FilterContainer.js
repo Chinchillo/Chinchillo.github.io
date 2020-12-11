@@ -52,8 +52,9 @@ export default class FilterContainer extends React.Component {
     render() {
 
         return (
-            <Container className="pt-2">
+            <div className="pt-3">
                 <Row>
+
                     <DateFilter alert={this.setStartDate} headline={"From:"} startDate={this.earliestPossibleDate} endDate={this.latestPossibledate} selectedDate={this.state.startFilteringDate} />
                 </Row>
                 <Row>
@@ -66,11 +67,11 @@ export default class FilterContainer extends React.Component {
                         <SimilarityFilter checked={this.state.includeSimilarNames} checkboxClicked={this.setIncludeSimilarNames} />
                     </Col>
                 </Row>*/}
-                <Row className=" mt-3 mb-1 ml-1" >
+                <Row className=" mt-3 mb-1 ml-1">
                     <Button onClick={this.HandleClick}>Apply</Button>
 
                 </Row>
-            </Container >)
+            </div>)
     }
 }
 

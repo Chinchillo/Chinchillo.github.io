@@ -113,7 +113,7 @@ export default class Chart extends React.Component {
             <AutoSizer >
                 {({ height, width }) => (
 
-                    <XYPlot margin={{ bottom: 70, top: 20 }} height={height} width={width} getX={d => d[0]}
+                    <XYPlot margin={{ bottom: 70, top: 20, left: 25, right: 25 }} height={height} width={width} getX={d => d[0]}
                         getY={d => d[1]} xType="ordinal" >
                         <HorizontalGridLines />
                         <XAxis tickLabelAngle={-90} title="Time" />

@@ -10,7 +10,7 @@ import FilterContainer from "./FilterContainer";
 import ChartContainer from "./ChartContainer";
 import Chart from "../components/Chart";
 import { Link } from "react-scroll";
-import { Container, Row, Col, Badge, Button } from "react-bootstrap";
+import { Container, Row, Col, Badge, Button, Alert, Jumbotron } from "react-bootstrap";
 
 import changes from "../data/full_data_2010-now.json"; //actual renaming data
 //import tmp from "../data/tmp.json"
@@ -165,11 +165,11 @@ export class App extends Component {
           <Row >
 
             {/* here i should probably set the height of the column and not in the map?*/}
-            <Col md={8} style={{ zIndex: 0 }}>
+            <Col md={9} style={{ zIndex: 0 }}>
               <NewMap height={this.mapHeight} changes={this.state.changesFilteredByDate} onMapChange={this.filterChangesByMapSection}></NewMap>
 
             </Col>
-            <Col md={4} style={{ zIndex: 2, backgroundColor: 'rgba(255,255,255,0.3)' }}>
+            <Col md={3} style={{ zIndex: 2, backgroundColor: 'rgba(255,255,255,0.3)' }}>
 
               <ToastContainer
                 position="top-right"
@@ -184,18 +184,20 @@ export class App extends Component {
               />
 
               <Row>
-                <h2 >
-                  <Badge variant="info">{`Showing ${this.state.changesFilteredByMap.length} renamings`}</Badge>
-                </h2>
+
+                <h4>{`Showing ${this.state.changesFilteredByMap.length} renamings`}</h4>
+
               </Row>
-              <FilterContainer startFilteringDate={this.startFilteringDate} endFilteringDate={this.endFilteringDate} filtersimilarity={this.filterChangesForSimilarity} />
+              <Row>
+                <FilterContainer startFilteringDate={this.startFilteringDate} endFilteringDate={this.endFilteringDate} filtersimilarity={this.filterChangesForSimilarity} />
+              </Row>
               <br></br>
               <Row style={{ height: 300, backgroundColor: 'rgba(255,255,255,0.8)', borderRadius: "10px" }}> <Chart data={this.createDateSeries()} /></Row>
               <Row>
 
 
 
-                <Button block className="mt-4 collapsible" variant="success" href=""><Link activeClass="active" spy={true} to="chartContainer" smooth={true}>Explore renamings &#8650; </Link></Button>
+                <Button block className="mt-4 collapsible" variant="outline-success" href=""><Link activeClass="active" spy={true} to="chartContainer" smooth={true}>Explore renamings &#8650; </Link></Button>
 
 
 
