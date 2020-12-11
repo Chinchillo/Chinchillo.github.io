@@ -121,7 +121,6 @@ export class App extends Component {
       start <= new Date(change.renaming_date) && new Date(change.renaming_date) <= end
     )
     const number = filteredChanges.length
-    //toast.success(`Showing ${number} change(s)`)
     this.setState({ changesFilteredByDate: filteredChanges })
     return filteredChanges
   }
@@ -170,6 +169,19 @@ export class App extends Component {
             <Col md={8} style={{ zIndex: 0 }}>
             </Col>
             <Col md={4} style={{ zIndex: 2, backgroundColor: 'rgba(255,255,255,0.3)' }}>
+
+              <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={true}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable={false}
+                pauseOnHover
+              />
+
               <Row>
                 <h2 >
                   <Badge variant="info">{`Showing ${this.state.changesFilteredByMap.length} renamings`}</Badge>

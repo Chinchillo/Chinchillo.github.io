@@ -30,7 +30,7 @@ export default class FilterContainer extends React.Component {
     HandleClick() {
         const { includeSimilarNames, startFilteringDate, endFilteringDate } = this.state
         if (startFilteringDate > endFilteringDate) {
-            toast("'To Date' has to be after the 'Start Date'")
+            toast.warn("'To' date has to be after the 'From' date")
         } else {
             //lift filtered data up
             this.props.filtersimilarity(includeSimilarNames, startFilteringDate, endFilteringDate)
