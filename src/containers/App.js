@@ -162,11 +162,12 @@ export class App extends Component {
         <Header />
         {/*Container for functionality with heigth 100 % */}
         <Container fluid className="h-100">
-          <Row style={{ height: this.mapHeight }}>
-            <NewMap height={this.mapHeight} changes={this.state.changesFilteredByDate} onMapChange={this.filterChangesByMapSection}></NewMap>
+          <Row >
 
             {/* here i should probably set the height of the column and not in the map?*/}
             <Col md={8} style={{ zIndex: 0 }}>
+              <NewMap height={this.mapHeight} changes={this.state.changesFilteredByDate} onMapChange={this.filterChangesByMapSection}></NewMap>
+
             </Col>
             <Col md={4} style={{ zIndex: 2, backgroundColor: 'rgba(255,255,255,0.3)' }}>
 

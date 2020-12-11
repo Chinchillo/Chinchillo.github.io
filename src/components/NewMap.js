@@ -97,7 +97,7 @@ export default class NewMap extends React.Component {
     render() {
 
         return <Wrapper id="map" style={{
-            height: this.props.height, width: document.body.clientWidth, zIndex: 1, position: "absolute"
+            height: this.props.height
         }
         }></Wrapper >
     }
