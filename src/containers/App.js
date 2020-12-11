@@ -9,8 +9,8 @@ import NewMap from "../components/NewMap";
 import FilterContainer from "./FilterContainer";
 import ChartContainer from "./ChartContainer";
 import Chart from "../components/Chart";
-
-import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-scroll";
+import { Container, Row, Col, Badge, Button } from "react-bootstrap";
 
 import changes from "../data/full_data_2010-now.json"; //actual renaming data
 //import tmp from "../data/tmp.json"
@@ -39,7 +39,6 @@ export class App extends Component {
     this.createColors = this.createColors.bind(this)
     this.createEntities = this.createEntities.bind(this)
     this.filterChangesByMapSection = this.filterChangesByMapSection.bind(this)
-
     this.state = {
       changesFilteredByDate: this.filterChangesForSimilarity(false, this.startFilteringDate, this.endFilteringDate),
       changesFilteredByMap: []
@@ -122,7 +121,7 @@ export class App extends Component {
       start <= new Date(change.renaming_date) && new Date(change.renaming_date) <= end
     )
     const number = filteredChanges.length
-    toast.success(`Showing ${number} change(s)`)
+    //toast.success(`Showing ${number} change(s)`)
     this.setState({ changesFilteredByDate: filteredChanges })
     return filteredChanges
   }
@@ -142,23 +141,20 @@ export class App extends Component {
   //map dates and renamings that happened on the date
   createDateSeries() {
     let renaming_dates = this.state.changesFilteredByMap.map((x) => (x.renaming_date))
-    let changesPerQuarter = []
+    let changesPerMonth = []
     for (let date of renaming_dates) {
       const date_strings = date.split("-")
       const year_and_month = date_strings[0] + "-" + date_strings[1]
-      const foundElement = changesPerQuarter.find(element => element[0] === year_and_month)
+      const foundElement = changesPerMonth.find(element => element[0] === year_and_month)
       if (foundElement !== undefined) {
         foundElement[1] = foundElement[1] + 1
       } else {
         const item = [year_and_month, 1]
-        changesPerQuarter.push(item)
+        changesPerMonth.push(item)
       }
     }
-    return changesPerQuarter
+    return changesPerMonth
   }
-
-
-
 
   render() {
 
@@ -174,27 +170,29 @@ export class App extends Component {
             <Col md={8} style={{ zIndex: 0 }}>
             </Col>
             <Col md={4} style={{ zIndex: 2, backgroundColor: 'rgba(255,255,255,0.3)' }}>
-              <Row style={{ height: 50 }}>
-                <ToastContainer
-                  position="top-right"
-                  autoClose={3000}
-                  hideProgressBar={true}
-                  newestOnTop
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable={false}
-                  pauseOnHover
-                />
+              <Row>
+                <h2 >
+                  <Badge variant="info">{`Showing ${this.state.changesFilteredByMap.length} renamings`}</Badge>
+                </h2>
               </Row>
               <FilterContainer startFilteringDate={this.startFilteringDate} endFilteringDate={this.endFilteringDate} filtersimilarity={this.filterChangesForSimilarity} />
               <br></br>
-              <Row style={{ height: 300, backgroundColor: 'rgba(255,255,255,0.9)', borderRadius: "10px" }}> <Chart data={this.createDateSeries()} /></Row>
+              <Row style={{ height: 300, backgroundColor: 'rgba(255,255,255,0.8)', borderRadius: "10px" }}> <Chart data={this.createDateSeries()} /></Row>
+              <Row>
+
+
+
+                <Button block className="mt-4 collapsible" variant="success" href=""><Link activeClass="active" spy={true} to="chartContainer" smooth={true}>Explore renamings &#8650; </Link></Button>
+
+
+
+              </Row>
             </Col>
           </Row>
-          <Row>
+          <Row id="chartContainer">
             <ChartContainer data={this.createEntities()} colors={this.entityColors}></ChartContainer>
           </Row>
+
         </Container>
       </>
     );

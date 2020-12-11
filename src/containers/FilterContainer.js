@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Button, Container } from "react-bootstrap";
+import { Row, Col, Button, Container, Badge } from "react-bootstrap";
 //import SimilarityFilter from "../components/SimilarityFilter";
 import DateFilter from "../components/DateFilter";
 import { toast } from "react-toastify";
@@ -52,14 +52,13 @@ export default class FilterContainer extends React.Component {
     render() {
 
         return (
-            <Container>
-
+            <Container className="pt-2">
                 <Row>
-                    <DateFilter alert={this.setStartDate} headline={"From Date:"} startDate={this.earliestPossibleDate} endDate={this.latestPossibledate} selectedDate={this.state.startFilteringDate} />
+                    <DateFilter alert={this.setStartDate} headline={"From:"} startDate={this.earliestPossibleDate} endDate={this.latestPossibledate} selectedDate={this.state.startFilteringDate} />
                 </Row>
                 <Row>
 
-                    <DateFilter alert={this.setEndDate} headline={"To Date:"} startDate={this.earliestPossibleDate} endDate={this.latestPossibledate} selectedDate={this.state.endFilteringDate} />
+                    <DateFilter alert={this.setEndDate} headline={"To:"} startDate={this.earliestPossibleDate} endDate={this.latestPossibledate} selectedDate={this.state.endFilteringDate} />
                 </Row>
 
                 {/*<Row>

@@ -12,6 +12,7 @@ export default class Chart extends React.Component {
         this.createData = this.createData.bind(this)
         this.createYearData = this.createYearData.bind(this)
         this.createBullshitDataForLineChart = this.createBullshitDataForLineChart.bind(this)
+        this.createZeroRenamingsMonths = this.createZeroRenamingsMonths.bind(this)
     }
 
     _forgetValue = () => {
@@ -24,31 +25,53 @@ export default class Chart extends React.Component {
         this.setState({ value });
     };
 
-    createData() {
+    createZeroRenamingsMonths(data) {
 
+        let return_value = [...data]
+        const firstDate = data[0][0]
+        const lastDate = data[data.length - 1][0]
+        let current = firstDate
+        while (current !== lastDate) {
+            const split = current.split("-")
+            const [year, month] = [split[0], split[1]]
+            if (month === "12") {
+                current = parseInt(year) + 1 + "-01"
+            } else {
+                current = year + "-" + ("00" + (parseInt(month) + 1)).slice(-2)
+            }
+            const found = data.find(elem => elem[0] == current)
+            if (found === undefined) {
+                return_value.push([current, 0])
+            }
+        }
+        return_value.sort()
+        return return_value
+
+
+    }
+
+    createData() {
         //data, filtered by month. '2019-01" as string
         let data = this.props.data
 
         if (data.length > 0) {
             data.sort()
             let TimeDifference = 0
-            //jeweils 1. 'Monat' 'Jahr
             const firstDate = new Date(data[0][0])
             const lastDate = new Date(data[data.length - 1][0])
             TimeDifference = Math.abs((firstDate.getTime() - lastDate.getTime()) / (1000 * 3600 * 24))
             //ca 1 to 13 months, most common case
-            if (390 > TimeDifference > 35) {
-
+            if (390 >= TimeDifference && TimeDifference > 35) {
+                return this.createZeroRenamingsMonths(data)
             }
-            //more than 12 monts
+            //more than 12 months
             else if (TimeDifference > 390) {
-                data = this.createYearData()
+                return this.createYearData(data)
             }
-
             return data
-        }
-        return [["no renamings", 0]]
 
+        }
+        return [["no data", 0]]
     }
 
     createYearData() {
