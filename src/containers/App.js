@@ -3,14 +3,14 @@ import "../../node_modules/react-vis/dist/style.css";
 import 'react-toastify/dist/ReactToastify.css';
 import * as L from 'leaflet';
 import React, { Component } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import Header from "../components/Header";
 import NewMap from "../components/NewMap";
 import FilterContainer from "./FilterContainer";
 import ChartContainer from "./ChartContainer";
 import Chart from "../components/Chart";
 import { Link } from "react-scroll";
-import { Container, Row, Col, Badge, Button, Alert, Jumbotron } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
 import changes from "../data/full_data_2010-now.json"; //actual renaming data
 //import tmp from "../data/tmp.json"
@@ -24,7 +24,7 @@ export class App extends Component {
 
   constructor(props) {
     super(props);
-    this.mapHeight = window.innerWidth >= 992 ? (0.9 * window.innerHeight) : 300
+    this.mapHeight = window.innerWidth >= 992 ? (0.9 * window.innerHeight) : 500
     //colors from bootstrap stylesheet
     this.entityColors = {}
     //date filter start date set on first page load
@@ -158,12 +158,8 @@ export class App extends Component {
     return (
       <>
         <Header />
-        {/*Container for functionality with heigth 100 % */}
         <Container fluid className="h-100">
           <Row >
-
-            {/* here i should probably set the height of the column and not in the map?*/}
-
             <Col md={9} >
               <NewMap height={this.mapHeight} changes={this.state.changesFilteredByDate} onMapChange={this.filterChangesByMapSection}></NewMap>
 
