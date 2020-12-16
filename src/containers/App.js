@@ -164,9 +164,9 @@ export class App extends Component {
             <NewMap height={this.mapHeight} changes={this.state.changesFilteredByDate} onMapChange={this.filterChangesByMapSection}></NewMap>
 
             {/* here i should probably set the height of the column and not in the map?*/}
-            <Col md={8} style={{ zIndex: 0 }}>
+            <Col md={8} >
             </Col>
-            <Col md={4} style={{ zIndex: 2, backgroundColor: 'rgba(255,255,255,0.3)' }}>
+            <Col md={4} style={{ backgroundColor: 'rgba(255,255,255,0.3)' }}>
 
               <ToastContainer
                 position="top-right"
