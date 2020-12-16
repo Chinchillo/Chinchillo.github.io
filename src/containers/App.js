@@ -191,13 +191,7 @@ export class App extends Component {
               <br></br>
               <Row style={{ height: 300, backgroundColor: 'rgba(255,255,255,0.8)', borderRadius: "10px" }}> <Chart data={this.createDateSeries()} /></Row>
               <Row>
-
-
-
                 <Button block className="mt-4 collapsible" variant="success" href=""><Link activeClass="active" spy={true} to="chartContainer" smooth={true}>Explore renamings &#8650; </Link></Button>
-
-
-
               </Row>
             </Col>
           </Row>
