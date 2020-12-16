@@ -106,8 +106,6 @@ export class App extends Component {
   }
 
 
-
-
   filterChangesForSimilarity(includeSimilar, start, end) {
     let filteredChanges = changes;
     //filter cases where old and new name are very similar
