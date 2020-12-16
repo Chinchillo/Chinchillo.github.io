@@ -106,8 +106,6 @@ export class App extends Component {
   }
 
 
-
-
   filterChangesForSimilarity(includeSimilar, start, end) {
     let filteredChanges = changes;
     //filter cases where old and new name are very similar
@@ -165,12 +163,12 @@ export class App extends Component {
           <Row >
 
             {/* here i should probably set the height of the column and not in the map?*/}
-            <Col md={9} style={{ zIndex: 0 }}>
+
+            <Col md={9} >
               <NewMap height={this.mapHeight} changes={this.state.changesFilteredByDate} onMapChange={this.filterChangesByMapSection}></NewMap>
 
             </Col>
-            <Col md={3} style={{ zIndex: 2, backgroundColor: 'rgba(255,255,255,0.3)' }}>
-
+            <Col md={3} style={{ backgroundColor: 'rgba(255,255,255,0.3)' }}>
               <ToastContainer
                 position="top-right"
                 autoClose={3000}
@@ -184,9 +182,7 @@ export class App extends Component {
               />
 
               <Row>
-
                 <h4>{`Showing ${this.state.changesFilteredByMap.length} renamings`}</h4>
-
               </Row>
               <Row>
                 <FilterContainer startFilteringDate={this.startFilteringDate} endFilteringDate={this.endFilteringDate} filtersimilarity={this.filterChangesForSimilarity} />
@@ -194,13 +190,7 @@ export class App extends Component {
               <br></br>
               <Row style={{ height: 300, backgroundColor: 'rgba(255,255,255,0.8)', borderRadius: "10px" }}> <Chart data={this.createDateSeries()} /></Row>
               <Row>
-
-
-
                 <Button block className="mt-4 collapsible" variant="outline-success" href=""><Link activeClass="active" spy={true} to="chartContainer" smooth={true}>Explore renamings &#8650; </Link></Button>
-
-
-
               </Row>
             </Col>
           </Row>
