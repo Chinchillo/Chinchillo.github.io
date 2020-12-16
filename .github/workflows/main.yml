@@ -40,4 +40,4 @@ jobs:
           with:
             server: aleksander-brueckner-zentrum.org
             username: p216914f1
-            password: ${{ secrets.ftp_password }}
+            password: ${{ secrets.FTP_PASSWORD }}
