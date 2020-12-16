@@ -22,13 +22,22 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-        
-      #deploy via FTP
-      - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@3.1.1
-        with:
-          ftp-server: ftp://aleksander-brueckner-zentrum.org
-          ftp-username: p216914f1
-          ftp-password: ${{ secrets.ftp_password }}
+        - name: 🚚 Get latest code
+          uses: actions/checkout@v2.3.2
+
+        - name: Use Node.js 12
+          uses: actions/setup-node@v2-beta
+          with:
+            node-version: '12'
+
+        - name: 🔨 Build Project
+          run: |
+            npm install
+            npm run build
+
+        - name: 📂 Sync files
+          uses: SamKirkland/FTP-Deploy-Action@4.0.0
+          with:
+            server: aleksander-brueckner-zentrum.org
+            username: p216914f1
+            password: ${{ secrets.ftp_password }}
