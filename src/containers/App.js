@@ -24,17 +24,17 @@ export class App extends Component {
 
   constructor(props) {
     super(props);
-    this.mapHeight = window.innerWidth >= 992 ? (0.9 * window.innerHeight) : 500
+    this.mapHeight = window.innerWidth >= 992 ? (0.9 * window.innerHeight) : 420
     //colors from bootstrap stylesheet
     this.entityColors = {}
     //date filter start date set on first page load
-    this.startFilteringDate = new Date('2019-01-01T00:00:00'),
-      //date filter end date set on first page load
-      this.endFilteringDate = new Date('2019-02-01T00:00:00'),
-      //initial map section
-      this.initialBounds =
-      L.latLngBounds(L.latLng(49.767, 9.733), L.latLng(54.572, 28.938)),
-      this.filterChangesForSimilarity = this.filterChangesForSimilarity.bind(this)
+    this.startFilteringDate = new Date('2019-01-01T00:00:00')
+    //date filter end date set on first page load
+    this.endFilteringDate = new Date('2019-02-01T00:00:00')
+    //initial map section
+    this.initialBounds =
+      L.latLngBounds(L.latLng(49.767, 9.733), L.latLng(54.572, 28.938))
+    this.filterChangesForSimilarity = this.filterChangesForSimilarity.bind(this)
     this.createDateSeries = this.createDateSeries.bind(this)
     this.createColors = this.createColors.bind(this)
     this.createEntities = this.createEntities.bind(this)
@@ -54,7 +54,9 @@ export class App extends Component {
     //console.log("filteredByDate: ", this.state.changesFilteredByDate)
     //console.log("changes filtered by map: ", this.state.changesFilteredByMap)
   }
-
+  /***
+   * groups entities of old and new street patrons according to frequency
+   */
   createEntities() {
     let entities = []
     for (let change of this.state.changesFilteredByMap) {
@@ -88,21 +90,16 @@ export class App extends Component {
 
   filterChangesByMapSection(map_coordinates) {
     let changesFilteredByMapSection = []
-    try {
-      this.state.changesFilteredByDate.forEach((change) => {
-        if (typeof change.lat !== "undefined") {
-          if (map_coordinates.contains({ "lat": change.lat, "lon": change.lon })) {
-            changesFilteredByMapSection.push(change)
-          }
-        } else {
-          //TODO: what about them?
+    this.state.changesFilteredByDate.forEach((change) => {
+      if (typeof change.lat !== "undefined") {
+        if (map_coordinates.contains({ "lat": change.lat, "lon": change.lon })) {
+          changesFilteredByMapSection.push(change)
         }
-      })
-    } catch {
-
-    }
+      } else {
+        //change was not geocoded correctly
+      }
+    })
     this.setState({ changesFilteredByMap: changesFilteredByMapSection })
-
   }
 
 
@@ -122,7 +119,7 @@ export class App extends Component {
     this.setState({ changesFilteredByDate: filteredChanges })
     return filteredChanges
   }
-  /*
+  /**
   get colors from bootstrap to pass down to charts
   */
   createColors() {
@@ -135,7 +132,9 @@ export class App extends Component {
     return theme_colors;
   }
 
-  //map dates and renamings that happened on the date
+  /**maps dates and renamings that happened on the date
+   * groups them by month and year
+   */
   createDateSeries() {
     let renaming_dates = this.state.changesFilteredByMap.map((x) => (x.renaming_date))
     let changesPerMonth = []
@@ -160,11 +159,10 @@ export class App extends Component {
         <Header />
         <Container fluid className="h-100">
           <Row >
-            <Col md={9} >
+            <Col md={9} id="mapContainer">
               <NewMap height={this.mapHeight} changes={this.state.changesFilteredByDate} onMapChange={this.filterChangesByMapSection}></NewMap>
-
             </Col>
-            <Col md={3} style={{ backgroundColor: 'rgba(255,255,255,0.3)' }}>
+            <Col id="rightContainer" md={3} style={{ backgroundColor: 'rgba(255,255,255,0.3)' }}>
               <ToastContainer
                 position="top-right"
                 autoClose={3000}
@@ -176,8 +174,7 @@ export class App extends Component {
                 draggable={false}
                 pauseOnHover
               />
-
-              <Row>
+              <Row id="numberOfChanges">
                 <h4>{`Showing ${this.state.changesFilteredByMap.length} renamings`}</h4>
               </Row>
               <Row>
