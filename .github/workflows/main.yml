@@ -29,6 +29,6 @@ jobs:
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@3.1.1
         with:
-          ftp-server: www.aleksander-brueckner-zentrum.org
+          ftp-server: ftp://aleksander-brueckner-zentrum.org
           ftp-username: p216914f1
           ftp-password: ${{ secrets.ftp_password }}
