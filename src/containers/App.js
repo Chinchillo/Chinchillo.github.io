@@ -1,6 +1,8 @@
+/*
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../node_modules/react-vis/dist/style.css";
 import 'react-toastify/dist/ReactToastify.css';
+*/
 import * as L from 'leaflet';
 import React, { Component } from "react";
 import { ToastContainer } from "react-toastify";

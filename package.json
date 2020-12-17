@@ -67,6 +67,7 @@
     "build": "cross-env NODE_ENV=production webpack",
     "deploy": "gh-pages -d dist",
     "publish": "npm run build && npm run deploy",
-    "gen_docs": "./node_modules/.bin/jsdoc -r ./src"
+    "gen_docs": "./node_modules/.bin/jsdoc -r ./src",
+    "test": "jest --coverage --config ./jest.config.js"
   }
 }
