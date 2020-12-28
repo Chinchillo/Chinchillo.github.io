@@ -6,6 +6,7 @@ import NewMap from "../components/NewMap";
 import FilterContainer from "./FilterContainer";
 import ChartContainer from "./ChartContainer";
 import Chart from "../components/Chart";
+import Table from "../components/Table"
 import { Link } from "react-scroll";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
@@ -48,8 +49,9 @@ export class App extends Component {
   }
 
   componentDidUpdate() {
-    //console.log("filteredByDate: ", this.state.changesFilteredByDate)
-    //console.log("changes filtered by map: ", this.state.changesFilteredByMap)
+    console.log("filteredByDate: ", this.state.changesFilteredByDate)
+    console.log("changes filtered by map: ", this.state.changesFilteredByMap)
+    console.log("categories: ", this.createEntities())
   }
   /***
    * groups entities of old and new street patrons according to frequency
@@ -186,6 +188,9 @@ export class App extends Component {
           </Row>
           <Row id="chartContainer">
             <ChartContainer data={this.createEntities()} colors={this.entityColors}></ChartContainer>
+          </Row>
+          <Row>
+            <Table></Table>
           </Row>
 
         </Container>

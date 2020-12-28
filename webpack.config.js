@@ -1,8 +1,10 @@
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
+const TerserPlugin = require('terser-webpack-plugin');
+
 
 module.exports = () => {
-  const { NODE_ENV } = process.env;
+  //const { NODE_ENV } = process.env;
 
   return {
     entry: "./src/index.js",
@@ -11,8 +13,9 @@ module.exports = () => {
       filename: "bundle.js",
       publicPath: "bundle"
     },
-    mode: NODE_ENV,
-    devtool: NODE_ENV === "development" ? "source-map" : "none",
+    //mode: NODE_ENV,
+    //devtool: NODE_ENV === "development" ? "source-map" : "none",
+    devtool: "source-map",
     module: {
       rules: [
         {

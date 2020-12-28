@@ -1,0 +1,6 @@
+thead button.descending::after {
+    font-family: "Font Awesome 5 Free"; font-weight: 900;
+  content: '\f160';
+  display: inline-block;
+  margin-left: 1em;
+}

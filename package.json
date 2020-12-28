@@ -42,6 +42,7 @@
     "react-wordcloud": "^1.2.3",
     "recharts": "^1.8.5",
     "regenerator-runtime": "^0.13.5",
+    "source-map-explorer": "^2.5.1",
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
@@ -60,6 +61,7 @@
     "jsdoc": "^3.6.3",
     "react-test-renderer": "^17.0.1",
     "style-loader": "1.1.2",
+    "terser-webpack-plugin": "4.0.0",
     "webpack": "4.41.5",
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "^3.11.0"
@@ -70,6 +72,7 @@
     "deploy": "gh-pages -d dist",
     "publish": "npm run build && npm run deploy",
     "gen_docs": "./node_modules/.bin/jsdoc -r ./src",
-    "test": "jest --coverage --config ./jest.config.js"
+    "test": "jest --coverage --config ./jest.config.js",
+    "analyze": "source-map-explorer dist/bundle/bundle.*"
   }
 }
